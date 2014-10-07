@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlConvertForIstok", "XmlConvertForIstok\XmlConvertForIstok.csproj", "{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{BE5DE228-CEB3-423A-A8F5-5EA505A566C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondTest", "SecondTest\SecondTest.csproj", "{F7B5966D-A76F-4367-B114-741FF1053C53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoTest", "MonoTest\MonoTest.csproj", "{8DBAC970-C3B0-479B-A42F-29351DBD28EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D7D764-C5DA-4323-9B6D-3B32CEE2A4B6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8DBAC970-C3B0-479B-A42F-29351DBD28EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBAC970-C3B0-479B-A42F-29351DBD28EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBAC970-C3B0-479B-A42F-29351DBD28EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBAC970-C3B0-479B-A42F-29351DBD28EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE5DE228-CEB3-423A-A8F5-5EA505A566C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE5DE228-CEB3-423A-A8F5-5EA505A566C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE5DE228-CEB3-423A-A8F5-5EA505A566C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE5DE228-CEB3-423A-A8F5-5EA505A566C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B5966D-A76F-4367-B114-741FF1053C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B5966D-A76F-4367-B114-741FF1053C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B5966D-A76F-4367-B114-741FF1053C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B5966D-A76F-4367-B114-741FF1053C53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = XmlConvertForIstok\XmlConvertForIstok.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

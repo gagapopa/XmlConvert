@@ -1,0 +1,24 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoTest\ExcelTexReadTest.cs">
+    <Files>
+      <File FileName="XmlConvertForIstok\Convert\ExcelTexRead.cs" Line="45" Column="45" />
+      <File FileName="MonoTest\ExcelTexReadTest.cs" Line="31" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="MonoTest" expanded="True">
+            <Node name="MonoTest" expanded="True">
+              <Node name="Test" expanded="True" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
