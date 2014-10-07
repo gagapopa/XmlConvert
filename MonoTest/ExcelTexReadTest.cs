@@ -121,7 +121,7 @@ namespace MonoTest
 
 			StringAssert.Contains(st.ParameterValueses.First().Code, "Э^к_i,т-3,сут");
 
-			StringAssert.Contains (st.Tables.First ().Tamples.First ().Name, "т-3");
+			StringAssert.Contains (st.Tables.First ().Tamples.First ().Name, "т-3");  
 			StringAssert.Contains (signals.First().Name, " Выработка электроэнергии турбоагрегатом в конденсационном режиме, тыс.кВтч");
 			StringAssert.Contains (signals.First ().Type, "TEP");
 			StringAssert.Contains (signals.First ().Property [0].Name, "formula_cod");
