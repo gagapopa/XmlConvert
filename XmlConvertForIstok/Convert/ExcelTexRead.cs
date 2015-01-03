@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
-using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
 
 namespace XmlConvertForIstok.Convert
@@ -89,8 +88,7 @@ namespace XmlConvertForIstok.Convert
         }
 
         public Station ReadSignals(Dictionary<string, TampleBilder> tamples, string sheetname, TepOrManual tep)
-        {
-			Contract.Requires (tamples != null);
+        {			
 			var tmp = tamples.ToList ();
 			string typesig = SignalType1;
 			if (tep == TepOrManual.Tep)
@@ -118,7 +116,7 @@ namespace XmlConvertForIstok.Convert
 				}
 			}
 		}
-
+		
 		private string Replace(string formula,string tmpname)
 		{
 			var pattern = @"([\$])(.*?)([\$])";

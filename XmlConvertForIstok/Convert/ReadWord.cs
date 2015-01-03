@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,9 +34,7 @@ namespace XmlConvertForIstok.Convert
         }
         //считывание таблиц Показаний и Коэффициентов
         public Station ReadParameterValues(StationBilder station, int workSheet, string patternfordown = @"[_][\w,\(,\),\-,\,]*", string patternforup = @"[\^].*" )
-        {
-            Contract.Requires(workSheet >= 0, "отрицательный номер Листа");
-            Contract.Requires(station != null, "stationBilder == null in ReadParameterValues");
+        {            
             //выбираем лист в экселе
             var wh = wb.Worksheets.ToList()[workSheet];
             string tableName = wh.Cell(1, 1).GetString();
@@ -46,10 +43,7 @@ namespace XmlConvertForIstok.Convert
                 .AsTable()
                 .DataRange
                 .Rows();
-            //проверяем наличие необходимых полей
-            Contract.Assert(workrange.First().Field("Обозначение") != null, "Нет поля 'Обозначение'");
-            Contract.Assert(workrange.First().Field("Показатель") != null, "Нет поля 'Показатель'");
-            Contract.Assert(workrange.First().Field("№ п/п") != null, "Нет поля '№ п/п'");
+            //проверяем наличие необходимых полей           
             
             //создаем таблицу и ее свойства
             var table = station.AddTableStation();
@@ -75,7 +69,7 @@ namespace XmlConvertForIstok.Convert
             //список отредактированных обозначений параметров
             var validParams = GetValidParams(paramlist, patternfordown, patternforup);
              //отредактированный список параметров заносим в модель 
-            validParams.ForEach(p => Contract.Requires(!validParams.HasDuplicates(),"Повторяющиеся значения в Обозначениях"));
+            //validParams.ForEach(p => Contract.Requires(!validParams.HasDuplicates(),"Повторяющиеся значения в Обозначениях"));
             //проходим по строкам и вносим значения в нашу модель
             int i = 0;
             workrange.ForEach(row =>
@@ -116,7 +110,7 @@ namespace XmlConvertForIstok.Convert
                     cl.ForEach(cell =>
                     {
                         var columnname = cell.WorksheetColumn().Cell(2).GetString().Trim();
-                        Contract.Assert(tampleDictionary[columnname] != null, "Нет нужного шаблона в словаре шаблонов ReadParameterValues");
+                        //Contract.Assert(tampleDictionary[columnname] != null, "Нет нужного шаблона в словаре шаблонов ReadParameterValues");
                         var sig = tampleDictionary[columnname].AddSignal().Name(name).Type(SignalType);
                         sig.AddSignalProperty().Name(SignalProp1Name).Type(SignalPropType).Value(peremen.ToString());
                         sig.AddSignalProperty().Name(SignalProp2Name).Type(SignalPropType).Value(id.ToString());
@@ -135,9 +129,9 @@ namespace XmlConvertForIstok.Convert
             string patternforup = @"[\^].*",string patternForPreInformation = @"([\S]*)[\ ][\–]")
         {
             //[\S]*[\^][\S]*
-            Contract.Requires(workSheet >= 0, "отрицательный номер Листа");
-            Contract.Requires(station != null, "stationBilder == null in Readformula");
-            Contract.Requires(patternForPreInformation != null, "patternForPreInformation != null");
+//            Contract.Requires(workSheet >= 0, "отрицательный номер Листа");
+//            Contract.Requires(station != null, "stationBilder == null in Readformula");
+//            Contract.Requires(patternForPreInformation != null, "patternForPreInformation != null");
             var preRegexp = new Regex(patternForPreInformation);
             //выбираем лист в экселе
             var wh = wb.Worksheets.ToList()[workSheet];
@@ -165,9 +159,9 @@ namespace XmlConvertForIstok.Convert
                  tampleDictionary.Add(tname, tm);
              });
             //проверяем наличие необходимых полей
-            Contract.Assert(workrange.First().Field("Обозначение") != null, "Нет поля 'Обозначение'");
-            Contract.Assert(workrange.First().Field("Показатель") != null, "Нет поля 'Показатель'");
-            Contract.Assert(workrange.First().Field("№ п/п") != null, "Нет поля '№ п/п'");
+//            Contract.Assert(workrange.First().Field("Обозначение") != null, "Нет поля 'Обозначение'");
+//            Contract.Assert(workrange.First().Field("Показатель") != null, "Нет поля 'Показатель'");
+//            Contract.Assert(workrange.First().Field("№ п/п") != null, "Нет поля '№ п/п'");
             //проходимся по каждой строке ашей таблицы
             workrange.ForEach(row =>
             {
@@ -195,7 +189,7 @@ namespace XmlConvertForIstok.Convert
                 cl.ForEach(cell =>
                 {
                     var columnname = cell.WorksheetColumn().Cell(2).GetString().Trim();
-                    Contract.Assert(tampleDictionary[columnname] != null, "Нет нужного шаблона в словаре шаблонов ReadFormula");
+//                    Contract.Assert(tampleDictionary[columnname] != null, "Нет нужного шаблона в словаре шаблонов ReadFormula");
                     var sig = tampleDictionary[columnname].AddSignal().Name(name).Type("TEP");
                     sig.AddSignalProperty().Name("formula_cod").Type(SignalPropType).Value(rowValidParams.Last().ToString());
                     sig.AddSignalProperty().Name("formula_text").Type(SignalPropType).Value(formulaText.ToString());

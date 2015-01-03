@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace XmlConvertForIstok.Convert
 {
@@ -46,8 +45,7 @@ namespace XmlConvertForIstok.Convert
 
 
         public static implicit operator Station(StationBilder bilder)
-        {
-            Contract.Requires(bilder != null);
+        {            
             return bilder.Station;
         }
     }
@@ -73,8 +71,7 @@ namespace XmlConvertForIstok.Convert
 
         }
         public static implicit operator ParameterValues(ParameterValuesesBilder bilder)
-        {
-            Contract.Requires(bilder != null);
+        {            
             return bilder._parameter;
         }
     }
@@ -164,8 +161,7 @@ namespace XmlConvertForIstok.Convert
             return new TampleBilder(tmpl);
         }
         public static implicit operator Table(TableBilder bilder)
-        {
-            Contract.Requires(bilder != null);
+        {            
             return bilder.Table;
         }
 
@@ -257,8 +253,7 @@ namespace XmlConvertForIstok.Convert
         }
 
         public static implicit operator Property(PropertyBilder bilder)
-        {
-            Contract.Requires(bilder != null);
+        {            
             return bilder._property;
         }
     }
