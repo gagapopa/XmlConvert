@@ -100,7 +100,7 @@ namespace MonoTest
 			StringAssert.Contains (signals.First ().Property [3].Name, "sortindex");
 			//StringAssert.Contains (signals.First ().Property [4].Name, "unit");$
 			StringAssert.Contains (signals.First ().Property [0].Value, "Э^к_i,т-3,сут");
-			StringAssert.Contains (signals.First ().Property [1].Value, "if($r_т,т-3,сут$==1)[т-3]:$Э_{тг-3},т-3,сут$;if($r_т,т-3,сут$==1)[т-4]:$Э_{тг-4},т-3,сут$;if($r_т,т-3,сут$==1)[т-5]:$Э_{тг-5},т-3,сут$;if($r_т,т-3,сут$==1)[т-6]:$Э_{тг-6},т-3,сут$;if($r_т,т-3,сут$==1)[т-7]:$Э_{тг-7},т-3,сут$;if($r_т,т-3,сут$==1)[т-8]:$Э_{тг-8},т-3,сут$;");
+			StringAssert.Contains (signals.First ().Property [1].Value, "if($r_т,т-3,сут$==1) return $Э,т-3,сут$;");
 			StringAssert.Contains (signals.First ().Property [2].Value, "8.1.2.");
 		}
 
