@@ -13,13 +13,17 @@ using System.Text.RegularExpressions;
 namespace XmlConvertForIstok.Convert
 {
 	/// <summary>
-	/// Description of ReplaceTex.
+	/// Обработка строки в подобие latex
 	/// </summary>
 	public static class ReplaceTex
 	{
 		public static string CleanedTex(string enterstr)
 		{
-			return  Regex.Replace(CleanTeX(enterstr),@"([\u005F][^\\\^\$]+)([\\\^][^\$]+)", "$2$1");
+			var strbld = new StringBuilder(Regex.Replace(CleanTeX(enterstr)
+			                                             , @"([\u005F][^\\\^\$]+)([\\\^][^\$]+)"
+			                                             , "$2$1"));
+			strbld.Replace(@"\^","^");
+			return  strbld.ToString();
 		}
 
 		

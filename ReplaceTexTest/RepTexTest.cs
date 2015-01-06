@@ -36,7 +36,7 @@ namespace ReplaceTexTest
 			
 			Console.WriteLine(asserttxt);			
 			StringAssert.Contains(				
-				@"($t\^н_{ух,(уг)i}$*$\bar Q^бр_{к(уг)i}$+$t\^н_{ух,(г)i}$*$\bar Q^бр)_{к(г)i}$/$\bar Q^бр_{кi}$;",
+				@"($t^н_{ух,(уг)i}$*$\bar Q^бр_{к(уг)i}$+$t^н_{ух,(г)i}$*$\bar Q^бр)_{к(г)i}$/$\bar Q^бр_{кi}$;",
 				asserttxt);			
 		}
 	}
