@@ -27,12 +27,13 @@ namespace SecondTest
 		[Test]
 		public void CreateProperty()
 		{
-			var prop = new PropertyNode();
+			var prop = new PropertyNode();			
 			prop.tagName = "TestTagName";
 			prop.Name	= "testName";
 			prop.Type = "testtype";
 			prop.Text = "TestText";			
 		}
+		
 		[Test]
 		public void AddNode()
 		{
@@ -45,5 +46,19 @@ namespace SecondTest
 			
 			Assert.IsNotNull(nodeone.Nodes.Find(n => n.tagName == "TestTagNametwo"));						
 		}	
+		
+		[Test]
+		public void AddPropertyNode()
+		{
+			var nodeone = new Node();
+			nodeone.tagName = "TestTagNameone";
+			var prop = new PropertyNode();
+			prop.Text = "TestText";
+			
+			nodeone.Nodes.Add(prop);
+			
+			Assert.IsNotNull(nodeone.Nodes[0] as PropertyNode);
+			Assert.IsTrue(((PropertyNode)nodeone.Nodes[0]).Text == "TestText");
+		}
 	}
 }

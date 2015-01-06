@@ -33,13 +33,8 @@ namespace XmlConvertForIstok.Composite
 	}	
 	
 	public class Node : AbstractNode
-	{
-		private List<AbstractNode> nodes = new List<AbstractNode>();
-		
-		public List<AbstractNode> Nodes{
-			get{return nodes;}
-			set{nodes = value;}
-		}
+	{		
+		public List<AbstractNode> Nodes = new List<AbstractNode>();
 		
 	}
 	public class PropertyNode : AbstractNode
