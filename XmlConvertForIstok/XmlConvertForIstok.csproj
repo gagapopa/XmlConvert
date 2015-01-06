@@ -169,9 +169,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Composite\Composite.cs" />
-    <Compile Include="Composite\IMyComponent.cs" />
-    <Compile Include="Composite\ModelComponent.cs" />
+    <Compile Include="Composite\Node.cs" />
     <Compile Include="Convert\Bilder.cs" />
     <Compile Include="Convert\ExcelTexRead.cs" />
     <Compile Include="Convert\Model.cs" />
