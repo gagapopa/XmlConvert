@@ -169,7 +169,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Composite\INodeBilder.cs" />
     <Compile Include="Composite\Node.cs" />
+    <Compile Include="Composite\NodeBilder.cs" />
     <Compile Include="Convert\Bilder.cs" />
     <Compile Include="Convert\ExcelTexRead.cs" />
     <Compile Include="Convert\Model.cs" />
