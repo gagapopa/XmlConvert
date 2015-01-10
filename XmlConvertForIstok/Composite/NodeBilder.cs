@@ -7,6 +7,8 @@
  * Для изменения этого шаблона используйте меню "Инструменты | Параметры | Кодирование | Стандартные заголовки".
  */
 using System;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace XmlConvertForIstok.Composite
 {
@@ -38,7 +40,7 @@ namespace XmlConvertForIstok.Composite
 		return new NodeBilder(newnode);
 	}
 	
-	public void AddProperty(string name, string text)
+	public INodeBilder AddProperty(string name, string text)
 	{
 		PropertyNode prop = new PropertyNode(){
 			Name = name,
@@ -46,8 +48,31 @@ namespace XmlConvertForIstok.Composite
 			tagName = "property",
 			Text = text
 		};
-		node.Nodes.Add(prop);		
+		node.Nodes.Add(prop);
+		return this;
 	}
+	public INodeBilder AddParamValues(string code)
+	{
+		ParamValuesNode param = new ParamValuesNode(){
+			tagName = "parameter_values",
+			Code = code
+		};
+		node.Nodes.Add(param);
+		return this;
+	}
+
+	public bool Serialyze(string _filename)
+	{
+		string filename = _filename + ".xml";
+		var xmlser = new XmlSerializer(node.GetType()); 
+        var writer = new StreamWriter(filename);
+        xmlser.Serialize(writer, node);
+        writer.Flush();
+        writer.Close();  
+        return File.Exists(filename); 
+		
+	}
+
 	#endregion
 	
 	public static implicit operator Node(NodeBilder nodebilder){		

@@ -8,6 +8,7 @@
  */
 using System;
 using NUnit.Framework;
+using System.IO;
 using XmlConvertForIstok.Composite;
 
 namespace SecondTest
@@ -27,7 +28,7 @@ namespace SecondTest
 		}
 		
 		[Test]
-		public void AddNode()
+		public void AddNodeTest()
 		{
 			INodeBilder node = new NodeBilder();
 			
@@ -42,7 +43,7 @@ namespace SecondTest
 		}	
 		
 		[Test]
-		public void AddProperty()
+		public void AddPropertyTest()
 		{
 			INodeBilder node = new NodeBilder();
 			
@@ -55,6 +56,37 @@ namespace SecondTest
 			StringAssert.Contains(prop.Text, "1PropertyText");
 			StringAssert.Contains(prop.Type, "string");
 			StringAssert.Contains(prop.tagName, "property");
+		}
+		
+		[Test]
+		public void AddParamValuesTest()
+		{
+			INodeBilder node = new NodeBilder();
+			
+			node.AddParamValues("code");
+			Node assertNode = (NodeBilder)node;
+			ParamValuesNode param = assertNode.Nodes[0] as ParamValuesNode;
+			
+			Assert.IsNotNull(param);
+			StringAssert.Contains("code", param.Code);			
+		}
+		
+		[Test]
+		public void XmlSrialyzerTest()
+		{
+			INodeBilder node = new NodeBilder();
+			
+			const string Filename = @"testfile";
+			if (File.Exists(Filename + "xml")) 
+			{
+				File.Delete(Filename + "xml");
+			}
+			
+			node.AddNode("node1", "type1").AddProperty("prop1", "proptext1");
+			node.AddParamValues("code");
+			node.Serialyze(Filename);
+			
+			Assert.IsTrue(File.Exists(Filename + ".xml"));
 		}
 	}	
 }

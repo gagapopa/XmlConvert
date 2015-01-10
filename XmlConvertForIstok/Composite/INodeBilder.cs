@@ -23,7 +23,10 @@ namespace XmlConvertForIstok.Composite
 //	</returns>
 		INodeBilder AddNode(string name,string type);
 		
-		void AddProperty(string name, string text);		
+		INodeBilder AddProperty(string name, string text);		
 		
+		INodeBilder AddParamValues(string code);
+
+		bool Serialyze(string filename);
 	}
 }
