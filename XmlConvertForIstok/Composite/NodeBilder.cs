@@ -9,6 +9,7 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace XmlConvertForIstok.Composite
 {
@@ -63,8 +64,38 @@ namespace XmlConvertForIstok.Composite
 
 	public bool Serialyze(string _filename)
 	{
-		return true;
-		
+		string filename = _filename + ".xml";
+		XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "да"));
+		var str = XmlNodeWrite(node);
+		doc.Add(str);
+		doc.Save(filename);
+		return File.Exists(filename);
+	}
+	private XElement XmlNodeWrite(AbstractNode _node)
+	{
+		var newnode = new XElement(_node.tagName);
+		switch (_node.GetType().Name) {
+			case "Node":
+				if (_node.Type != null)
+					newnode.Add(new XAttribute("type",_node.Type));
+				if (_node.Name != null)
+					newnode.Add(new XAttribute("name",_node.Name));
+				((Node)_node).Nodes.ForEach(nd => newnode.Add(XmlNodeWrite(nd)));
+				break;
+			case "PropertyNode":
+				if (_node.Type != null)
+					newnode.Add(new XAttribute("type",_node.Type));
+				if (_node.Name != null)
+					newnode.Add(new XAttribute("name",_node.Name));
+				if (((PropertyNode)_node).Text != null)
+					newnode.Add(((PropertyNode)_node).Text);
+				break;
+			case "ParamValuesNode":
+				if (((ParamValuesNode)_node).Code != null)
+					newnode.Add(new XAttribute("code",((ParamValuesNode)_node).Code));
+				break;
+ 		}
+		return newnode;
 	}
 
 	#endregion

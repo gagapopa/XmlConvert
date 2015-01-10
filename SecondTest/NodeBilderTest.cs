@@ -82,7 +82,8 @@ namespace SecondTest
 				File.Delete(Filename + "xml");
 			}
 			
-			node.AddNode("node1", "type1").AddProperty("prop1", "proptext1");
+			node.AddNode("node1", "type1").AddProperty("prop1", "proptext1")
+				.AddNode("node2", "type2").AddProperty("prop2", "proptext2");
 			node.AddParamValues("code");
 			node.Serialyze(Filename);
 			
