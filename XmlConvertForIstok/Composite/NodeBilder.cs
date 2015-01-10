@@ -63,13 +63,7 @@ namespace XmlConvertForIstok.Composite
 
 	public bool Serialyze(string _filename)
 	{
-		string filename = _filename + ".xml";
-		var xmlser = new XmlSerializer(node.GetType()); 
-        var writer = new StreamWriter(filename);
-        xmlser.Serialize(writer, node);
-        writer.Flush();
-        writer.Close();  
-        return File.Exists(filename); 
+		return true;
 		
 	}
 
