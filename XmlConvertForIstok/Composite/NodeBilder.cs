@@ -71,6 +71,7 @@ namespace XmlConvertForIstok.Composite
 		doc.Save(filename);
 		return File.Exists(filename);
 	}
+	//TODO: Доделать валидацию входного параметра.
 	private XElement XmlNodeWrite(AbstractNode _node)
 	{
 		var newnode = new XElement(_node.tagName);
@@ -83,25 +84,24 @@ namespace XmlConvertForIstok.Composite
 				((Node)_node).Nodes.ForEach(nd => newnode.Add(XmlNodeWrite(nd)));
 				break;
 			case "PropertyNode":
-				if (_node.Type != null)
-					newnode.Add(new XAttribute("type",_node.Type));
-				if (_node.Name != null)
-					newnode.Add(new XAttribute("name",_node.Name));
-				if (((PropertyNode)_node).Text != null)
-					newnode.Add(((PropertyNode)_node).Text);
+				var propnode = (PropertyNode)_node;
+				if (propnode.Type != null)
+					newnode.Add(new XAttribute("type",propnode.Type));
+				if (propnode.Name != null)
+					newnode.Add(new XAttribute("name",propnode.Name));
+				if (propnode.Text != null)
+					newnode.Add(propnode.Text);
 				break;
 			case "ParamValuesNode":
-				if (((ParamValuesNode)_node).Code != null)
-					newnode.Add(new XAttribute("code",((ParamValuesNode)_node).Code));
+				var parnode = (ParamValuesNode)_node;
+				if (parnode.Code != null)
+					newnode.Add(new XAttribute("code",parnode.Code));
 				break;
  		}
 		return newnode;
 	}
-
-	#endregion
-	
+	#endregion	 
 	public static implicit operator Node(NodeBilder nodebilder){		
-		return nodebilder.node;	}
-		
+		return nodebilder.node;	}		
 	}
 }
