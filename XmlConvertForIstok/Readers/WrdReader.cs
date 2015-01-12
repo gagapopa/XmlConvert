@@ -30,7 +30,7 @@ namespace XmlConvertForIstok.Readers
 			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, true)) {
 				var tables = myDocument.MainDocumentPart.Document.Body.Elements<Table>();
 				if (tables != null) {
-					for (int i = 0; i < tables.Count(); i++) {
+					for (int i = 0; i < tables.Count(); i++) {						
 						tblarr.Add(i);
 					}
 				}				
@@ -42,7 +42,7 @@ namespace XmlConvertForIstok.Readers
 		public DataTable GetTable(int tbl,string _filename)
 		{
 			var dataTableForReturn = new DataTable();
-			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, true)) {
+			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, false)) {
 				Table tabl = myDocument.MainDocumentPart.Document.Body.Elements<Table>().ElementAt(tbl);
 				if (tabl != null) {
 					int  rowNumber = tabl.Elements<TableRow>().Count();
@@ -69,8 +69,6 @@ namespace XmlConvertForIstok.Readers
 			}
 			return dataTableForReturn;
 		}
-
-
 		#endregion
 
 		public void OpenDoc(string _filename)

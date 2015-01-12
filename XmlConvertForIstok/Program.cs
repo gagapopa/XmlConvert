@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using XmlConvertForIstok.Presenter;
+using XmlConvertForIstok.Readers;
+using XmlConvertForIstok.Composite;
 
 namespace XmlConvertForIstok
 {
@@ -16,7 +19,9 @@ namespace XmlConvertForIstok
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            IConvertForm form = new XMLConvertForm();
+            new MyPresenter(form,new WrdReader(),new NodeBilder());
+            Application.Run((Form)form);
         }
     }
 }

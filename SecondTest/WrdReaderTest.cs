@@ -30,10 +30,10 @@ namespace SecondTest
 		public void GetDataTableTest()
 		{
 			IReader rd = new WrdReader();
-			var tbl = rd.GetTable(1, "TestWord.docx");
+			var tbl = rd.GetTable(0, "TestWord.docx");
 			DataColumn coll = tbl.Columns[0];
 			
-			StringAssert.Contains("asd", coll.ColumnName);
+			StringAssert.Contains("111", coll.ColumnName);
 		}
 		
 		[Test]
@@ -43,7 +43,7 @@ namespace SecondTest
 			DataTable tbl = rd.GetTable(1, "TestWord.docx");
 			DataRow row = tbl.Rows[0];
 			
-			StringAssert.Contains("qqq", row[0].ToString());
+			StringAssert.Contains("G_2∙550/∆t,", row[1].ToString());
 		}
 	}
 }
