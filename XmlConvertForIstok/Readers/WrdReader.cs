@@ -7,11 +7,11 @@
  * Для изменения этого шаблона используйте меню "Инструменты | Параметры | Кодирование | Стандартные заголовки".
  */
 using System;
-using System.Data;
-using System.Linq;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.IO.Packaging;
+using System.Linq;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
@@ -33,15 +33,41 @@ namespace XmlConvertForIstok.Readers
 					for (int i = 0; i < tables.Count(); i++) {
 						tblarr.Add(i);
 					}
-				}
-				return tblarr.ToArray();
+				}				
 			}
+			return tblarr.ToArray();
 		}
 
 
-		public DataTable GetTable(int tbl)
+		public DataTable GetTable(int tbl,string _filename)
 		{
-			throw new NotImplementedException();
+			var dataTableForReturn = new DataTable();
+			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, true)) {
+				Table tabl = myDocument.MainDocumentPart.Document.Body.Elements<Table>().ElementAt(tbl);
+				if (tabl != null) {
+					int  rowNumber = tabl.Elements<TableRow>().Count();
+					int coumnNumber = tabl.Elements<TableRow>().ElementAt(0).Elements<TableCell>().Count();
+					
+					for (int i = 0; i < rowNumber; i++) {
+						DataRow nrow = null;
+						if (i>0) {
+							nrow = dataTableForReturn.NewRow();
+						}						
+						for (int j = 0; j < coumnNumber; j++) {
+							string cell = tabl.Elements<TableRow>().ElementAt(i).Elements<TableCell>().ElementAt(j).InnerText;
+							if (i == 0) {
+								dataTableForReturn.Columns.Add(cell);
+								continue;
+							}
+							if (nrow != null)
+								nrow[j] = cell;
+						}
+						if (nrow != null)
+							dataTableForReturn.Rows.Add(nrow);
+					}
+				}
+			}
+			return dataTableForReturn;
 		}
 
 
