@@ -27,6 +27,8 @@ namespace XmlConvertForIstok.Composite
 		
 		INodeBilder AddParamValues(string code);
 
+		int GetNodesNumber();
+		
 		bool Serialyze(string filename);
 	}
 }

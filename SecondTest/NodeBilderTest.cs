@@ -89,5 +89,19 @@ namespace SecondTest
 			
 			Assert.IsTrue(File.Exists(Filename + ".xml"));
 		}
+		
+		[Test]
+		public void GetNodesNumberTest()
+		{
+			INodeBilder node = new NodeBilder();
+			
+			node.AddNode("node1", "type1").AddProperty("prop1", "proptext1");
+			node.AddNode("node2", "type2").AddProperty("prop2", "proptext2");
+			node.AddProperty("prop3", "proptext3");			
+			
+			int nodeNumber = node.GetNodesNumber();
+			
+			Assert.IsTrue(nodeNumber == 2);
+		}
 	}	
 }

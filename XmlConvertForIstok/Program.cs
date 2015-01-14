@@ -20,7 +20,7 @@ namespace XmlConvertForIstok
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             IConvertForm form = new XMLConvertForm();
-            new MyPresenter(form,new WrdReader(),new NodeBilder());
+            new MyPresenter(form,new WrdReader(),new TableToModel(new NodeBilder()));
             Application.Run((Form)form);
         }
     }

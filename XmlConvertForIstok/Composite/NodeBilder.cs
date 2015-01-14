@@ -62,6 +62,11 @@ namespace XmlConvertForIstok.Composite
 		return this;
 	}
 
+	public int GetNodesNumber()
+	{		
+		return node.Nodes.FindAll(nd => nd as Node != null).Count;
+	}
+	
 	public bool Serialyze(string _filename)
 	{
 		string filename = _filename + ".xml";
@@ -76,19 +81,19 @@ namespace XmlConvertForIstok.Composite
 	{
 		var newnode = new XElement(_node.tagName);
 		switch (_node.GetType().Name) {
-			case "Node":
-				if (_node.Type != null)
-					newnode.Add(new XAttribute("type",_node.Type));
+			case "Node":				
 				if (_node.Name != null)
 					newnode.Add(new XAttribute("name",_node.Name));
+				if (_node.Type != null)
+					newnode.Add(new XAttribute("type",_node.Type));
 				((Node)_node).Nodes.ForEach(nd => newnode.Add(XmlNodeWrite(nd)));
 				break;
 			case "PropertyNode":
-				var propnode = (PropertyNode)_node;
-				if (propnode.Type != null)
-					newnode.Add(new XAttribute("type",propnode.Type));
+				var propnode = (PropertyNode)_node;				
 				if (propnode.Name != null)
 					newnode.Add(new XAttribute("name",propnode.Name));
+				if (propnode.Type != null)
+					newnode.Add(new XAttribute("type",propnode.Type));
 				if (propnode.Text != null)
 					newnode.Add(propnode.Text);
 				break;
