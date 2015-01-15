@@ -18,6 +18,14 @@ namespace XmlConvertForIstok
 		private System.Windows.Forms.DataGridView DataTableView;
 		private System.Windows.Forms.ComboBox TablesArrayList;
 		private System.Windows.Forms.Button SaveBtn;
+		private System.Windows.Forms.Button NextBtn;
+		private System.Windows.Forms.TextBox TableNameTextBox;
+		private System.Windows.Forms.Button AddTableBtn;
+		private System.Windows.Forms.TextBox StationNameTextBox;
+		private System.Windows.Forms.Label infoLabel;
+		private System.Windows.Forms.Label upperLabel;
+		private System.Windows.Forms.RadioButton autoTable;
+		private System.Windows.Forms.RadioButton manualTable;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -44,6 +52,14 @@ namespace XmlConvertForIstok
 			this.DataTableView = new System.Windows.Forms.DataGridView();
 			this.TablesArrayList = new System.Windows.Forms.ComboBox();
 			this.SaveBtn = new System.Windows.Forms.Button();
+			this.NextBtn = new System.Windows.Forms.Button();
+			this.TableNameTextBox = new System.Windows.Forms.TextBox();
+			this.AddTableBtn = new System.Windows.Forms.Button();
+			this.StationNameTextBox = new System.Windows.Forms.TextBox();
+			this.infoLabel = new System.Windows.Forms.Label();
+			this.upperLabel = new System.Windows.Forms.Label();
+			this.autoTable = new System.Windows.Forms.RadioButton();
+			this.manualTable = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,11 +75,17 @@ namespace XmlConvertForIstok
 			// 
 			// DataTableView
 			// 
+			this.DataTableView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
+			this.DataTableView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 			this.DataTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.DataTableView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
 			this.DataTableView.Location = new System.Drawing.Point(12, 41);
 			this.DataTableView.Name = "DataTableView";
+			this.DataTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.DataTableView.Size = new System.Drawing.Size(990, 454);
 			this.DataTableView.TabIndex = 2;
+			this.DataTableView.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataTableViewColumnHeaderMouseDoubleClick);
 			// 
 			// TablesArrayList
 			// 
@@ -72,10 +94,13 @@ namespace XmlConvertForIstok
 			this.TablesArrayList.Name = "TablesArrayList";
 			this.TablesArrayList.Size = new System.Drawing.Size(165, 21);
 			this.TablesArrayList.TabIndex = 3;
+			this.TablesArrayList.Visible = false;
+			this.TablesArrayList.SelectionChangeCommitted += new System.EventHandler(this.TablesArrayListSelectionChangeCommittedAsync);
 			// 
 			// SaveBtn
 			// 
-			this.SaveBtn.Location = new System.Drawing.Point(183, 501);
+			this.SaveBtn.Enabled = false;
+			this.SaveBtn.Location = new System.Drawing.Point(927, 502);
 			this.SaveBtn.Name = "SaveBtn";
 			this.SaveBtn.Size = new System.Drawing.Size(75, 23);
 			this.SaveBtn.TabIndex = 4;
@@ -83,12 +108,96 @@ namespace XmlConvertForIstok
 			this.SaveBtn.UseVisualStyleBackColor = true;
 			this.SaveBtn.Click += new System.EventHandler(this.SaveBtnClick);
 			// 
+			// NextBtn
+			// 
+			this.NextBtn.Enabled = false;
+			this.NextBtn.Location = new System.Drawing.Point(657, 499);
+			this.NextBtn.Name = "NextBtn";
+			this.NextBtn.Size = new System.Drawing.Size(75, 23);
+			this.NextBtn.TabIndex = 5;
+			this.NextBtn.Text = "Next >>";
+			this.NextBtn.UseVisualStyleBackColor = true;
+			this.NextBtn.Click += new System.EventHandler(this.NextBtnClick);
+			// 
+			// TableNameTextBox
+			// 
+			this.TableNameTextBox.Location = new System.Drawing.Point(183, 502);
+			this.TableNameTextBox.Name = "TableNameTextBox";
+			this.TableNameTextBox.Size = new System.Drawing.Size(468, 20);
+			this.TableNameTextBox.TabIndex = 6;
+			this.TableNameTextBox.Visible = false;
+			// 
+			// AddTableBtn
+			// 
+			this.AddTableBtn.Enabled = false;
+			this.AddTableBtn.Location = new System.Drawing.Point(576, 528);
+			this.AddTableBtn.Name = "AddTableBtn";
+			this.AddTableBtn.Size = new System.Drawing.Size(75, 23);
+			this.AddTableBtn.TabIndex = 7;
+			this.AddTableBtn.Text = "AddTable";
+			this.AddTableBtn.UseVisualStyleBackColor = true;
+			this.AddTableBtn.Click += new System.EventHandler(this.AddTableBtnClick);
+			// 
+			// StationNameTextBox
+			// 
+			this.StationNameTextBox.Location = new System.Drawing.Point(611, 15);
+			this.StationNameTextBox.Name = "StationNameTextBox";
+			this.StationNameTextBox.Size = new System.Drawing.Size(391, 20);
+			this.StationNameTextBox.TabIndex = 8;
+			this.StationNameTextBox.Visible = false;
+			this.StationNameTextBox.TextChanged += new System.EventHandler(this.StationNameTextBoxTextChanged);
+			this.StationNameTextBox.Leave += new System.EventHandler(this.StationNameTextBoxLeave);
+			// 
+			// infoLabel
+			// 
+			this.infoLabel.Location = new System.Drawing.Point(12, 585);
+			this.infoLabel.Name = "infoLabel";
+			this.infoLabel.Size = new System.Drawing.Size(990, 23);
+			this.infoLabel.TabIndex = 9;
+			// 
+			// upperLabel
+			// 
+			this.upperLabel.Location = new System.Drawing.Point(157, 12);
+			this.upperLabel.Name = "upperLabel";
+			this.upperLabel.Size = new System.Drawing.Size(410, 23);
+			this.upperLabel.TabIndex = 10;
+			// 
+			// autoTable
+			// 
+			this.autoTable.Location = new System.Drawing.Point(183, 527);
+			this.autoTable.Name = "autoTable";
+			this.autoTable.Size = new System.Drawing.Size(104, 24);
+			this.autoTable.TabIndex = 11;
+			this.autoTable.TabStop = true;
+			this.autoTable.Text = "АвтоВвод";
+			this.autoTable.UseVisualStyleBackColor = true;
+			this.autoTable.Visible = false;
+			// 
+			// manualTable
+			// 
+			this.manualTable.Location = new System.Drawing.Point(183, 558);
+			this.manualTable.Name = "manualTable";
+			this.manualTable.Size = new System.Drawing.Size(104, 24);
+			this.manualTable.TabIndex = 12;
+			this.manualTable.TabStop = true;
+			this.manualTable.Text = "РучнойВвод";
+			this.manualTable.UseVisualStyleBackColor = true;
+			this.manualTable.Visible = false;
+			// 
 			// XMLConvertForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1014, 617);
+			this.Controls.Add(this.manualTable);
+			this.Controls.Add(this.autoTable);
+			this.Controls.Add(this.upperLabel);
+			this.Controls.Add(this.infoLabel);
+			this.Controls.Add(this.StationNameTextBox);
+			this.Controls.Add(this.AddTableBtn);
+			this.Controls.Add(this.TableNameTextBox);
+			this.Controls.Add(this.NextBtn);
 			this.Controls.Add(this.SaveBtn);
 			this.Controls.Add(this.TablesArrayList);
 			this.Controls.Add(this.DataTableView);
@@ -97,6 +206,7 @@ namespace XmlConvertForIstok
 			this.Text = "XMLConvertForm";
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 	}

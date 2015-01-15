@@ -7,6 +7,10 @@
  * Для изменения этого шаблона используйте меню "Инструменты | Параметры | Кодирование | Стандартные заголовки".
  */
 using System;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Data;
+using System.Windows.Forms;
 using XmlConvertForIstok.Readers;
 using XmlConvertForIstok.Composite;
 
@@ -25,16 +29,55 @@ namespace XmlConvertForIstok.Presenter
 		
 		public MyPresenter(IConvertForm _form,IReader _reader,ITableToModel _tableToModel)
 		{
-//			form.DataTableForView.DataSource = reader.GetTable(0, @"C:\Users\Господин\Documents\Mono\XmlConvertForIstok2\SecondTest\bin\Debug\TestWord.docx");
 			form = _form;
 			reader = _reader;
 			tableToModel = _tableToModel;
+			
 			form.FileOpenClick += FileOpen;
+			form.StationNameTextChange += StationNameChanged;
+			form.TablesArrayListCommitted += ShowTable;
+			form.NextClick += NextClickTableShow;
+			form.AddTableClick += AddTableClick;
+			form.FileSaveClick += SaveFile;
 		}
 		
-		void FileOpen(object sender, EventArgs e)
+		public void FileOpen(object sender,  EventArgs e)
 		{			
-			form.DataTableForView.DataSource = reader.GetTable(0,form.FileName);
+			form.TablesForView = reader.GetTableArray(form.OpenFileName);
+		}
+		
+		public void StationNameChanged (object sender,  EventArgs e)
+		{
+			tableToModel.CreateStation(form.StationName);
+		}
+		
+		public void ShowTable(object sender,  EventArgs e)
+		{
+			form.DataTableForView.DataSource = reader.GetTable(form.TableNumberForView, form.OpenFileName);
+			foreach (DataGridViewColumn  col in form.DataTableForView.Columns) {
+				col.SortMode = DataGridViewColumnSortMode.NotSortable;
+			}
+		}
+		
+		public void NextClickTableShow(object sender,  EventArgs e)
+		{
+			DataTable tbl;
+			tbl = (DataTable)form.DataTableForView.DataSource;
+			form.DataTableForView.DataSource = reader.TableCleanTex(tbl);		
+		}
+		
+		public void AddTableClick(object sender,  EventArgs e)
+		{
+			tableToModel.TableToModelConv(form.TableName,
+			                              (DataTable)form.DataTableForView.DataSource,
+			                              form.ListCol,
+			                              form.ListTmpl,
+			                              form.Knd);
+		}
+		
+		public void SaveFile(object sender,  EventArgs e)
+		{
+			tableToModel.SerializeModel(form.CloseFileName);
 		}
 		
 	}

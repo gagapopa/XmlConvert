@@ -19,5 +19,7 @@ namespace XmlConvertForIstok.Readers
 		int[] GetTableArray(string _filename);
 		
 		DataTable GetTable(int tbl,string _filename);		
+
+		DataTable TableCleanTex(DataTable tbl);
 	}
 }
