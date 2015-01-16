@@ -21,7 +21,7 @@ namespace SecondTest
 		{
 			IReader rd = new WrdReader();
 			
-			int[] assert = rd.GetTableArray("TestWord.docx");
+			int[] assert = rd.GetTableArray("TestWord.docx").Result;
 			
 			Assert.IsTrue(assert[1] == 1);
 		}
@@ -30,7 +30,7 @@ namespace SecondTest
 		public void GetDataTableTest()
 		{
 			IReader rd = new WrdReader();
-			var tbl = rd.GetTable(0, "TestWord.docx");
+			var tbl = rd.GetTable(0, "TestWord.docx").Result;
 			DataColumn coll = tbl.Columns[0];
 			
 			StringAssert.Contains("111", coll.ColumnName);
@@ -40,10 +40,21 @@ namespace SecondTest
 		public void GetDataTable()
 		{
 			IReader rd = new WrdReader();
-			DataTable tbl = rd.GetTable(1, "TestWord.docx");
+			DataTable tbl = rd.GetTable(1, "TestWord.docx").Result;
 			DataRow row = tbl.Rows[0];
 			
-			StringAssert.Contains("G_2∙550/∆t,", row[1].ToString());
+			StringAssert.Contains(@"$G_2$*550/$\Delta t$", row[1].ToString());
+		}
+		
+		[Test]
+		public void TableReplaceTexTest()
+		{
+			IReader rd = new WrdReader();
+			DataTable tbl = rd.GetTable(1, "TestWord.docx").Result;
+			DataTable tblTex = rd.TableCleanTex(tbl);
+			DataRow row = tblTex.Rows[1];
+			
+			StringAssert.Contains(@"($ G^q  )_{tt}$/$\Delta t$", row[1].ToString());
 		}
 	}
 }

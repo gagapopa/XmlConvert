@@ -26,6 +26,7 @@ namespace XmlConvertForIstok
 		private System.Windows.Forms.Label upperLabel;
 		private System.Windows.Forms.RadioButton autoTable;
 		private System.Windows.Forms.RadioButton manualTable;
+		private System.Windows.Forms.ProgressBar progressBar;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -60,6 +61,7 @@ namespace XmlConvertForIstok
 			this.upperLabel = new System.Windows.Forms.Label();
 			this.autoTable = new System.Windows.Forms.RadioButton();
 			this.manualTable = new System.Windows.Forms.RadioButton();
+			this.progressBar = new System.Windows.Forms.ProgressBar();
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -85,6 +87,7 @@ namespace XmlConvertForIstok
 			this.DataTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.DataTableView.Size = new System.Drawing.Size(990, 454);
 			this.DataTableView.TabIndex = 2;
+			this.DataTableView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataTableViewCellMouseDoubleClick);
 			this.DataTableView.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataTableViewColumnHeaderMouseDoubleClick);
 			// 
 			// TablesArrayList
@@ -150,7 +153,7 @@ namespace XmlConvertForIstok
 			// 
 			// infoLabel
 			// 
-			this.infoLabel.Location = new System.Drawing.Point(12, 585);
+			this.infoLabel.Location = new System.Drawing.Point(12, 555);
 			this.infoLabel.Name = "infoLabel";
 			this.infoLabel.Size = new System.Drawing.Size(990, 23);
 			this.infoLabel.TabIndex = 9;
@@ -175,7 +178,7 @@ namespace XmlConvertForIstok
 			// 
 			// manualTable
 			// 
-			this.manualTable.Location = new System.Drawing.Point(183, 558);
+			this.manualTable.Location = new System.Drawing.Point(261, 528);
 			this.manualTable.Name = "manualTable";
 			this.manualTable.Size = new System.Drawing.Size(104, 24);
 			this.manualTable.TabIndex = 12;
@@ -184,12 +187,20 @@ namespace XmlConvertForIstok
 			this.manualTable.UseVisualStyleBackColor = true;
 			this.manualTable.Visible = false;
 			// 
+			// progressBar
+			// 
+			this.progressBar.Location = new System.Drawing.Point(13, 598);
+			this.progressBar.Name = "progressBar";
+			this.progressBar.Size = new System.Drawing.Size(164, 23);
+			this.progressBar.TabIndex = 13;
+			// 
 			// XMLConvertForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1014, 617);
+			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.manualTable);
 			this.Controls.Add(this.autoTable);
 			this.Controls.Add(this.upperLabel);

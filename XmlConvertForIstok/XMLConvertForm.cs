@@ -18,7 +18,6 @@ using System.Windows.Forms;
 
 namespace XmlConvertForIstok
 {
-	
 	/// <summary>
 	/// Description of XMLConvertForm.
 	/// </summary>
@@ -35,19 +34,26 @@ namespace XmlConvertForIstok
 			//
 			AddTableBtn.Visible = false;
 			autoTable.Checked = true;
+			Ptog += ProgressBar;
+			
 		}
-		 
-		public event EventHandler FileOpenClick;
+
+		public ForProgress Ptog {
+			get;
+			set;
+		}
 		
-		public event EventHandler FileSaveClick;			
+		public event EventHandler FileOpenClick = delegate{ };
 		
-		public event EventHandler TablesArrayListCommitted;
+		public event EventHandler FileSaveClick  = delegate{ };			
 		
-		public event EventHandler NextClick;
+		public event EventHandler TablesArrayListCommitted  = delegate{ };
 		
-		public event EventHandler AddTableClick;
+		public event EventHandler NextClick  = delegate{ };
 		
-		public event EventHandler StationNameTextChange;
+		public event EventHandler AddTableClick = delegate{ };
+		
+		public event EventHandler StationNameTextChange = delegate{ };
 		
 		public DataGridView DataTableForView{
 			get{
@@ -121,7 +127,7 @@ namespace XmlConvertForIstok
 				OpenFileName = dlg.FileName;
 				StationNameTextBox.Visible = true;
 				StationNameTextBox.Enabled = true;
-				if (FileOpenClick != null) FileOpenClick(this,EventArgs.Empty);
+				FileOpenClick(this,EventArgs.Empty);
 				upperLabel.Text = @"Введите название станции ->";
 			}			
 		}
@@ -130,7 +136,7 @@ namespace XmlConvertForIstok
 			var dlg = new SaveFileDialog();			
 			if (dlg.ShowDialog() == DialogResult.OK) {
 				CloseFileName = dlg.FileName;
-				if (FileSaveClick != null) FileSaveClick(this,EventArgs.Empty);
+				FileSaveClick(this,EventArgs.Empty);
 				AddTableBtn.Visible = false;
 				AddTableBtn.Enabled = false;
 				autoTable.Visible  = false;
@@ -148,8 +154,7 @@ namespace XmlConvertForIstok
 			autoTable.Visible = false;
 			manualTable.Visible = false;
 			TableNumberForView = (int)TablesArrayList.SelectedItem;
-			if (TablesArrayListCommitted != null)
-				 TablesArrayListCommitted(this, EventArgs.Empty);			
+			TablesArrayListCommitted(this, EventArgs.Empty);			
 			listCol.RemoveAll(x => true);
 			listTmpl.RemoveAll(x => true);
 			upperLabel.Text = "";
@@ -160,7 +165,7 @@ namespace XmlConvertForIstok
 		void NextBtnClick(object sender, EventArgs e)
 		{
 			if (!selectionColumnOn){
-				if (NextClick != null) NextClick(this,EventArgs.Empty);
+				NextClick(this,EventArgs.Empty);
 				AddTableBtn.Visible = true;
 				AddTableBtn.Enabled = true;
 				autoTable.Visible  = true;
@@ -179,7 +184,7 @@ namespace XmlConvertForIstok
 			if (TableNameTextBox.Text.Length > 1) {
 				if (autoTable.Checked) Knd = KindOfTable.TEP;
 				if (manualTable.Checked) Knd = KindOfTable.manual;
-				if (AddTableClick != null) AddTableClick(this, EventArgs.Empty);
+				AddTableClick(this, EventArgs.Empty);
 				SaveBtn.Enabled = true;	
 				infoLabel.Text = "Можете сохранить xml, нажав SaveFile";
 			}
@@ -211,8 +216,7 @@ namespace XmlConvertForIstok
 							listCol.Add(e.ColumnIndex);
 							break;
 						case 3:
-							infoLabel.Text = @"Выделите двойным кликом заголовок столбца с Формулой";
-							SintaxLight(e.ColumnIndex);
+							infoLabel.Text = @"Выделите двойным кликом заголовок столбца с Формулой";							
 							listCol.Add(e.ColumnIndex);
 							break;
 						case 4:												
@@ -228,26 +232,42 @@ namespace XmlConvertForIstok
 			    	
 			}
 		}
-		private void SintaxLight(int columnNumber)
+		private  int ProgressBar(int now, int all)
 		{
-			for (int i = 0, DataTableViewRowsCount = DataTableView.Rows.Count; i < DataTableViewRowsCount; i++) {
-				DataGridViewRow row = DataTableView.Rows[i];
-				//TODO: Подсветка синтаксиса 
+			Action act = () => {
+	    	progressBar.Maximum = all;
+	    	progressBar.Value = now +1;
+	    	progressBar.Value = now;
+			};
+			
+			if (InvokeRequired) {
+				Invoke(act);
+			}else{
+				act();
 			}
+	    	return 0;
 		}
 		void StationNameTextBoxLeave(object sender, EventArgs e)
 		{
 			if (StationNameTextBox.Text.Length > 0) {				
 				StationName = StationNameTextBox.Text;
-				if (StationNameTextChange != null) StationNameTextChange(this, EventArgs.Empty);
+				StationNameTextChange(this, EventArgs.Empty);
 				StationNameTextBox.Enabled = false;
 			}
 	
+		}
+		
+		void DataTableViewCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			Form txtForm = new TextForm();
+			txtForm.ShowDialog();	
 		}	
 	}	
 		
 	public interface IConvertForm
 	{
+		ForProgress Ptog {get;set;}
+		
 		event EventHandler FileOpenClick;
 		
 		event EventHandler FileSaveClick;		

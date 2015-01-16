@@ -107,7 +107,7 @@ namespace SecondTest
 			INodeBilder nodeBld = new NodeBilder();
 			rep = new TableToModel(nodeBld);			
 			IReader rd = new WrdReader();
-			DataTable tbl = rd.GetTable(2, filename);
+			DataTable tbl = rd.GetTable(2, filename).Result;
 			var colNumber = new List<int> {
 				0,
 				1,

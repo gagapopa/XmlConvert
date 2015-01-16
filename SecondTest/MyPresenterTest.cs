@@ -17,7 +17,6 @@ namespace SecondTest
 		[Test]
 		public void TestMethod()
 		{
-			// TODO: Add your test.
 		}
 	}
 }

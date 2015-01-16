@@ -31,7 +31,9 @@ namespace XmlConvertForIstok.Presenter
 		{
 			form = _form;
 			reader = _reader;
-			tableToModel = _tableToModel;
+			tableToModel = _tableToModel;			
+		
+			reader.GetTableArrayProgress += form.Ptog;
 			
 			form.FileOpenClick += FileOpen;
 			form.StationNameTextChange += StationNameChanged;
@@ -41,9 +43,9 @@ namespace XmlConvertForIstok.Presenter
 			form.FileSaveClick += SaveFile;
 		}
 		
-		public void FileOpen(object sender,  EventArgs e)
-		{			
-			form.TablesForView = reader.GetTableArray(form.OpenFileName);
+		public async void FileOpen(object sender,  EventArgs e)
+		{
+			form.TablesForView = await reader.GetTableArray(form.OpenFileName);
 		}
 		
 		public void StationNameChanged (object sender,  EventArgs e)
@@ -51,9 +53,9 @@ namespace XmlConvertForIstok.Presenter
 			tableToModel.CreateStation(form.StationName);
 		}
 		
-		public void ShowTable(object sender,  EventArgs e)
-		{
-			form.DataTableForView.DataSource = reader.GetTable(form.TableNumberForView, form.OpenFileName);
+		public async void ShowTable(object sender,  EventArgs e)
+		{			
+			form.DataTableForView.DataSource = await reader.GetTable(form.TableNumberForView, form.OpenFileName);
 			foreach (DataGridViewColumn  col in form.DataTableForView.Columns) {
 				col.SortMode = DataGridViewColumnSortMode.NotSortable;
 			}

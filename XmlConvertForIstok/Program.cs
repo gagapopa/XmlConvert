@@ -9,6 +9,8 @@ using XmlConvertForIstok.Composite;
 
 namespace XmlConvertForIstok
 {
+	public delegate int ForProgress(int now,int all);
+	
     static class Program
     {
         /// <summary>

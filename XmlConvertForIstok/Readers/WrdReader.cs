@@ -12,66 +12,84 @@ using System.Data;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
+using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using XmlConvertForIstok;
 using XmlConvertForIstok.Convert;
+
 
 namespace XmlConvertForIstok.Readers
 {
+	
 	/// <summary>
 	/// Description of WrdReader.
 	/// </summary>
 	public class WrdReader :IReader
 	{
+		static int NullMethod(int i,int j)
+		{
+			return 0;
+		}
+		public event ForProgress GetTableArrayProgress =  NullMethod;
+		
 		#region IReader implementation
 		
-		public int[] GetTableArray(string _filename)
+		public Task<int[]> GetTableArray(string _filename)
 		{
-			var tblarr = new List<int>();
-			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, true)) {
-				var tables = myDocument.MainDocumentPart.Document.Body
-					.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>();
-				if (tables != null) {
-					for (int i = 0; i < tables.Count(); i++) {						
-						tblarr.Add(i);
+			return Task.Run(() => {
+			    GetTableArrayProgress(0,100);
+				var tblarr = new List<int>();
+				using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, true)) {
+					var tables = myDocument.MainDocumentPart.Document.Body
+						.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>();
+					if (tables != null) {
+						for (int i = 0; i < tables.Count(); i++) {						
+							tblarr.Add(i);
+							GetTableArrayProgress(i,tables.Count());
+						}
 					}
-				}				
-			}
-			return tblarr.ToArray();
+					return tblarr.ToArray();;
+				}
+			});
 		}
 
 
-		public DataTable GetTable(int tbl,string _filename)
+		public Task<DataTable> GetTable(int tbl,string _filename)
 		{
-			var dataTableForReturn = new DataTable();
-			using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, false)) {
-				DocumentFormat.OpenXml.Wordprocessing.Table tabl = 
-					myDocument.MainDocumentPart.Document.Body
-					.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().ElementAt(tbl);
-				if (tabl != null) {
-					int  rowNumber = tabl.Elements<TableRow>().Count();
-					int coumnNumber = tabl.Elements<TableRow>().ElementAt(0).Elements<TableCell>().Count();
-					
-					for (int i = 0; i < rowNumber; i++) {
-						DataRow nrow = null;
-						if (i>0) {
-							nrow = dataTableForReturn.NewRow();
-						}						
-						for (int j = 0; j < coumnNumber; j++) {
-							string cell = tabl.Elements<TableRow>().ElementAt(i).Elements<TableCell>().ElementAt(j).InnerText.Trim(' ');
-							if (i == 0) {
-								dataTableForReturn.Columns.Add(cell);
-								continue;
-							}							
+			return Task.Run(() =>{
+			    GetTableArrayProgress(0,100);
+				var dataTableForReturn = new DataTable();
+				using (WordprocessingDocument myDocument = WordprocessingDocument.Open(_filename, false)) {
+					DocumentFormat.OpenXml.Wordprocessing.Table tabl = 
+						myDocument.MainDocumentPart.Document.Body
+						.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().ElementAt(tbl);
+					if (tabl != null) {
+						int  rowNumber = tabl.Elements<TableRow>().Count();
+									
+						for (int i = 0; i < rowNumber; i++) {
+							DataRow nrow = null;
+							int coumnNumber = tabl.Elements<TableRow>().ElementAt(i).Elements<TableCell>().Count();			
+							if (i>0) {
+								nrow = dataTableForReturn.NewRow();
+							}						
+							for (int j = 0; j < coumnNumber; j++) {								
+								string cell = tabl.Elements<TableRow>().ElementAt(i).Elements<TableCell>().ElementAt(j).InnerText.Trim(' ');
+								if (i == 0) {
+									dataTableForReturn.Columns.Add(cell);
+									continue;
+								}							
+								if (nrow != null)
+									nrow[j] = ReplaceTex.EnterSimbol(cell);
+							}
 							if (nrow != null)
-								nrow[j] = ReplaceTex.EnterSimbol(cell);
+								dataTableForReturn.Rows.Add(nrow);
+							GetTableArrayProgress(i,rowNumber);
 						}
-						if (nrow != null)
-							dataTableForReturn.Rows.Add(nrow);
 					}
 				}
-			}
-			return dataTableForReturn;
+				return dataTableForReturn;
+			});
 		}
 		
 
