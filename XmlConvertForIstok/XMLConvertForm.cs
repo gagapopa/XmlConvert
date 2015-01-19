@@ -193,6 +193,7 @@ namespace XmlConvertForIstok
 			if (TableNameTextBox.Text.Length > 1 && intervalArray.Text.Length >1) {
 				if (autoTable.Checked) Knd = KindOfTable.TEP;
 				if (manualTable.Checked) Knd = KindOfTable.manual;
+				IntervalStr = intervalArray.Text;
 				AddTableClick(this, EventArgs.Empty);
 				SaveBtn.Enabled = true;	
 				infoLabel.Text = "Можете сохранить xml, нажав SaveFile";
