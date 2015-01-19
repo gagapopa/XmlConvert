@@ -7,6 +7,7 @@
  * Для изменения этого шаблона используйте меню "Инструменты | Параметры | Кодирование | Стандартные заголовки".
  */
 using System;
+using System.Collections.Generic;
 using System.Data;
 using NUnit.Framework;
 using XmlConvertForIstok.Readers;
@@ -51,10 +52,11 @@ namespace SecondTest
 		{
 			IReader rd = new WrdReader();
 			DataTable tbl = rd.GetTable(1, "TestWord.docx").Result;
-			DataTable tblTex = rd.TableCleanTex(tbl);
+			var listint = new List<int> { 0, 1 };
+			DataTable tblTex = rd.TableCleanTex(tbl, listint);
 			DataRow row = tblTex.Rows[1];
 			
-			StringAssert.Contains(@"($ G^q  )_{tt}$/$\Delta t$", row[1].ToString());
+			StringAssert.Contains(@"($ G_tt\^q  )$/$\Delta t$", row[1].ToString());
 		}
 	}
 }

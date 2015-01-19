@@ -65,7 +65,7 @@ namespace XmlConvertForIstok.Presenter
 		{
 			DataTable tbl;
 			tbl = (DataTable)form.DataTableForView.DataSource;
-			form.DataTableForView.DataSource = reader.TableCleanTex(tbl);		
+			form.DataTableForView.DataSource = reader.TableCleanTex(tbl, form.ListCol);		
 		}
 		
 		public void AddTableClick(object sender,  EventArgs e)

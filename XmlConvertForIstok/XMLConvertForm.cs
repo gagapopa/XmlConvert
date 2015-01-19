@@ -132,6 +132,7 @@ namespace XmlConvertForIstok
 				StationNameTextBox.Enabled = true;
 				FileOpenClick(this,EventArgs.Empty);
 				upperLabel.Text = @"Введите название станции ->";
+				OpnButton.Enabled = false;
 			}			
 		}
 		void SaveBtnClick(object sender, EventArgs e)
@@ -146,6 +147,7 @@ namespace XmlConvertForIstok
 				manualTable.Visible = false;
 				TableNameTextBox.Visible = false;
 				editingCellsOn = false;
+				OpnButton.Enabled = true;
 			}		
 	
 		}
@@ -260,54 +262,14 @@ namespace XmlConvertForIstok
 				StationNameTextChange(this, EventArgs.Empty);
 				StationNameTextBox.Enabled = false;
 			}
-	
 		}
 		
 		void DataTableViewCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			if (editingCellsOn) {
+			if (editingCellsOn && e.ColumnIndex >= 0) {
 				Form txtForm = new TextForm(DataTableView.Rows[e.RowIndex].Cells[e.ColumnIndex]);
 				txtForm.ShowDialog();
 			}	
 		}
-	}	
-		
-	public interface IConvertForm
-	{
-		ForProgress Ptog {get;set;}
-		
-		event EventHandler FileOpenClick;
-		
-		event EventHandler FileSaveClick;		
-		
-		event EventHandler TablesArrayListCommitted;
-		
-		event EventHandler NextClick;
-		
-		event EventHandler AddTableClick;
-		
-		event EventHandler StationNameTextChange;
-		
-		DataGridView DataTableForView {get;set;}
-		
-		List<int> ListTmpl {get;set;}
-		
-		List<int> ListCol {get;set;}
-		
-		int[] TablesForView {set;}
-		
-		int TableNumberForView {get;}
-		
-		string OpenFileName {get;set;}
-		
-		string CloseFileName {get;set;}
-		
-		string TableName {get;}
-		
-		string StationName {get;}
-		
-		string IntervalStr {get;}
-		
-		KindOfTable Knd  {get;set;}
 	}
 }

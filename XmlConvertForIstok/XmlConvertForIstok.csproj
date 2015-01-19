@@ -38,6 +38,7 @@
     <SignAssembly>False</SignAssembly>
     <DelaySign>False</DelaySign>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ApplicationIcon>..\..\..\..\Desktop\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -183,6 +184,7 @@
     <Compile Include="Composite\NodeBilder.cs" />
     <Compile Include="Composite\TableToModel.cs" />
     <Compile Include="Convert\ReplaceTex.cs" />
+    <Compile Include="IConvertForm.cs" />
     <Compile Include="Presenter\Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

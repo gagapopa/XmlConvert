@@ -7,6 +7,7 @@
  * Для изменения этого шаблона используйте меню "Инструменты | Параметры | Кодирование | Стандартные заголовки".
  */
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data;
 
@@ -22,7 +23,7 @@ namespace XmlConvertForIstok.Readers
 		
 		Task<DataTable> GetTable(int tbl,string _filename);		
 
-		DataTable TableCleanTex(DataTable tbl);
+		DataTable TableCleanTex(DataTable tbl, List<int> columnNumber);
 		
 		event ForProgress GetTableArrayProgress;
 	}

@@ -79,11 +79,12 @@ namespace XmlConvertForIstok
 			// 
 			// DataTableView
 			// 
+			this.DataTableView.AllowUserToOrderColumns = true;
 			this.DataTableView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.DataTableView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 			this.DataTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.DataTableView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.DataTableView.ImeMode = System.Windows.Forms.ImeMode.On;
 			this.DataTableView.Location = new System.Drawing.Point(12, 41);
 			this.DataTableView.Name = "DataTableView";
 			this.DataTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -208,6 +209,7 @@ namespace XmlConvertForIstok
 			this.intervalArray.Name = "intervalArray";
 			this.intervalArray.Size = new System.Drawing.Size(121, 21);
 			this.intervalArray.TabIndex = 14;
+			this.intervalArray.Visible = false;
 			// 
 			// XMLConvertForm
 			// 

@@ -2,10 +2,10 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="*"
 		Name="Your Application"
-		Language="1033"
+		Language="1049"
 		Version="1.0.0.0"
 		UpgradeCode="B86BF812-78C7-4CAB-9BBE-EBC5517CBACF"
-		Manufacturer="Your Company">
+		Manufacturer="Timur Company">
 		<Package Description="#Description"
 			Comments="Comments"
 			InstallerVersion="200"

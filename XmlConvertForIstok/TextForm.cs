@@ -60,6 +60,7 @@ namespace XmlConvertForIstok
 		{
 			cell.Value = richTextBox.Text;
 			Close();
+			Dispose();
 		}
 		void CanselBtnClick(object sender, EventArgs e)
 		{

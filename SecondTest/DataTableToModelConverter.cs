@@ -119,7 +119,7 @@ namespace SecondTest
 				5,
 				6
 			};
-			rep.TableToModelConv(tableName, tbl, colNumber, tmpNumber, knd);
+			rep.TableToModelConv(tableName, tbl, colNumber, tmpNumber, "сут", knd);
 			Node node = (NodeBilder)nodeBld;
 			return node;
 		}

@@ -12,6 +12,7 @@ using System.Data;
 using System.IO;
 using System.IO.Packaging;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -75,12 +76,16 @@ namespace XmlConvertForIstok.Readers
 							}						
 							for (int j = 0; j < coumnNumber; j++) {								
 								string cell = tabl.Elements<TableRow>().ElementAt(i).Elements<TableCell>().ElementAt(j).InnerText.Trim(' ');
-								if (i == 0) {
+								if (i == 0)  {
 									dataTableForReturn.Columns.Add(cell);
 									continue;
-								}							
+								}
+								if (dataTableForReturn.Columns.Count < coumnNumber) {
+									dataTableForReturn.Columns.Add(cell);
+								}
 								if (nrow != null)
-									nrow[j] = ReplaceTex.EnterSimbol(cell);
+									nrow[j] = ReplaceTex.EnterSimbol(cell);								
+								
 							}
 							if (nrow != null)
 								dataTableForReturn.Rows.Add(nrow);
@@ -93,11 +98,12 @@ namespace XmlConvertForIstok.Readers
 		}
 		
 
-		public DataTable TableCleanTex(DataTable tbl)
+		public DataTable TableCleanTex(DataTable tbl, List<int> columnNumber)
 		{
 			foreach (DataRow row in tbl.Rows) {
 				for (int i = 0; i < tbl.Columns.Count; i++) {
-					row[i] = ReplaceTex.CleanedTex(row[i].ToString());
+					var str = new StringBuilder(ReplaceTex.CleanedTex(row[i].ToString()));					 
+					if (i != columnNumber.Last()) row[i] = str.Replace("$","").ToString();
 				}
 			}
 			return tbl;

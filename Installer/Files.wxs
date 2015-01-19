@@ -5,7 +5,7 @@
 			<Directory Id="ProgramFilesFolder" Name="PFiles">
 				<Directory Id="INSTALLDIR" Name="Your Application">
 					<Component Id="MyComponent" Guid="8B61B2A0-5973-4063-837C-FD3394DD8A48" DiskId="1">
-						<File Id="LicenseFile" Name="license.rtf" Source="license.rtf"/>
+						<File Id="LicenseFile" Name="license.rtf" Source="license.rtf"/>						
 					</Component>
 				</Directory>
 			</Directory>
