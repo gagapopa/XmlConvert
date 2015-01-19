@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle ("XmlConvertForIstok")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("HP")]
+[assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("XmlConvertForIstok")]
-[assembly: AssemblyCopyright ("Copyright © HP 2014")]
+[assembly: AssemblyCopyright ("Malihov Timur")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 
