@@ -51,6 +51,7 @@ namespace XmlConvertForIstok
 			this.richTextBox.Size = new System.Drawing.Size(727, 229);
 			this.richTextBox.TabIndex = 0;
 			this.richTextBox.Text = "";
+			this.richTextBox.TextChanged += new System.EventHandler(this.RichTextBoxTextChanged);
 			// 
 			// CanselBtn
 			// 
@@ -60,6 +61,7 @@ namespace XmlConvertForIstok
 			this.CanselBtn.TabIndex = 1;
 			this.CanselBtn.Text = "Cancel";
 			this.CanselBtn.UseVisualStyleBackColor = true;
+			this.CanselBtn.Click += new System.EventHandler(this.CanselBtnClick);
 			// 
 			// OkBtn
 			// 
@@ -69,6 +71,7 @@ namespace XmlConvertForIstok
 			this.OkBtn.TabIndex = 2;
 			this.OkBtn.Text = "Ok";
 			this.OkBtn.UseVisualStyleBackColor = true;
+			this.OkBtn.Click += new System.EventHandler(this.OkBtnClick);
 			// 
 			// TextForm
 			// 

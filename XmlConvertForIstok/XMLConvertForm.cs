@@ -236,8 +236,7 @@ namespace XmlConvertForIstok
 		{
 			Action act = () => {
 	    	progressBar.Maximum = all;
-	    	progressBar.Value = now +1;
-	    	progressBar.Value = now;
+	    	progressBar.Value = now +1;	    	
 			};
 			
 			if (InvokeRequired) {
@@ -259,7 +258,7 @@ namespace XmlConvertForIstok
 		
 		void DataTableViewCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			Form txtForm = new TextForm();
+			Form txtForm = new TextForm(DataTableView.Rows[e.RowIndex].Cells[e.ColumnIndex]);
 			txtForm.ShowDialog();	
 		}	
 	}	
