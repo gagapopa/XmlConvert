@@ -89,6 +89,8 @@ namespace XmlConvertForIstok
 		public string TableName {get {return TableNameTextBox.Text;}}
 		
 		public string StationName {get;private set;}
+		
+		public string IntervalStr {get;private set;}
 
 		public List<int> ListTmpl {
 			get {
@@ -116,8 +118,9 @@ namespace XmlConvertForIstok
 		
 		private List<int> listCol = new List<int>();
 		
-		private List<int> listTmpl = new List<int>();	
+		private List<int> listTmpl = new List<int>();
 		
+		private bool editingCellsOn;
 		
 		void OpnButtonClick(object sender, EventArgs e)
 		{
@@ -142,6 +145,7 @@ namespace XmlConvertForIstok
 				autoTable.Visible  = false;
 				manualTable.Visible = false;
 				TableNameTextBox.Visible = false;
+				editingCellsOn = false;
 			}		
 	
 		}
@@ -153,6 +157,7 @@ namespace XmlConvertForIstok
 			TableNameTextBox.Visible = false;
 			autoTable.Visible = false;
 			manualTable.Visible = false;
+			intervalArray.Visible = false;
 			TableNumberForView = (int)TablesArrayList.SelectedItem;
 			TablesArrayListCommitted(this, EventArgs.Empty);			
 			listCol.RemoveAll(x => true);
@@ -172,8 +177,10 @@ namespace XmlConvertForIstok
 				manualTable.Visible = true;
 				TableNameTextBox.Visible = true;
 				NextBtn.Enabled = false;
-				infoLabel.Text = @"Проверте значения в таблице еще раз, введите название таблицы и нажмите AddTable";
+				intervalArray.Visible = true;
+				infoLabel.Text = @"Проверте значения в таблице еще раз, введите название таблицы, интервал и нажмите AddTable";
 			} else{
+				editingCellsOn = true;
 				selectionColumnOn = false;
 				infoLabel.Text = @"Проверте значения в таблице и нажмите Next>>";
 			}
@@ -181,7 +188,7 @@ namespace XmlConvertForIstok
 		
 		void AddTableBtnClick(object sender, EventArgs e)
 		{
-			if (TableNameTextBox.Text.Length > 1) {
+			if (TableNameTextBox.Text.Length > 1 && intervalArray.Text.Length >1) {
 				if (autoTable.Checked) Knd = KindOfTable.TEP;
 				if (manualTable.Checked) Knd = KindOfTable.manual;
 				AddTableClick(this, EventArgs.Empty);
@@ -189,7 +196,7 @@ namespace XmlConvertForIstok
 				infoLabel.Text = "Можете сохранить xml, нажав SaveFile";
 			}
 			else				
-				MessageBox.Show("Введите название таблицы");
+				MessageBox.Show("Введите название таблицы и выберите интервал");
 		}
 		
 		void StationNameTextBoxTextChanged(object sender, EventArgs e)
@@ -258,9 +265,11 @@ namespace XmlConvertForIstok
 		
 		void DataTableViewCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			Form txtForm = new TextForm(DataTableView.Rows[e.RowIndex].Cells[e.ColumnIndex]);
-			txtForm.ShowDialog();	
-		}	
+			if (editingCellsOn) {
+				Form txtForm = new TextForm(DataTableView.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+				txtForm.ShowDialog();
+			}	
+		}
 	}	
 		
 	public interface IConvertForm
@@ -296,6 +305,8 @@ namespace XmlConvertForIstok
 		string TableName {get;}
 		
 		string StationName {get;}
+		
+		string IntervalStr {get;}
 		
 		KindOfTable Knd  {get;set;}
 	}

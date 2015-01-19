@@ -74,6 +74,7 @@ namespace XmlConvertForIstok.Presenter
 			                              (DataTable)form.DataTableForView.DataSource,
 			                              form.ListCol,
 			                              form.ListTmpl,
+			                              form.IntervalStr,
 			                              form.Knd);
 		}
 		

@@ -29,7 +29,14 @@ namespace XmlConvertForIstok.Composite
 		/// <param name="listColumnsNumber">Столбцы основных параметров: 0-п\п, 1-Наименование,2-Размерность,3-Обозначение,4-Формула</param>
 		/// <param name="listtmplNumber">Столбцы участия в шаблонах</param>
 		/// <returns>Удалась ли конвертация в модель</returns>
-		bool TableToModelConv(string tblName,DataTable table,List<int> listColumnsNumber, List<int> listtmplNumber, KindOfTable kot);
+		/// <param name = "interval">Временной интервал для расчета</param>
+		/// <param name = "kot">Ручные или автоматические параметры</param>
+		bool TableToModelConv(string tblName,
+		                      DataTable table,
+		                      List<int> listColumnsNumber,
+		                      List<int> listtmplNumber,
+		                      string interval,
+		                      KindOfTable kot);
 		
 		void SerializeModel(string fileName);
 	}
@@ -63,22 +70,23 @@ namespace XmlConvertForIstok.Composite
 		
 		public void SerializeModel(string fileName)
 		{
-			nodeBld.Serialyze(fileName);
+			mainBilder.Serialyze(fileName);
 		}
 
 		public bool TableToModelConv(string tblName,
 		                             DataTable table, 
 		                             List<int> listColumnsNumber,
 		                             List<int> listtmplNumber,
+		                             string interval,
 		                             KindOfTable kot)
 		{
 			if (nodeBld == null) nodeBld = mainBilder;
 			var tableNode = nodeBld.AddNode(tblName,"Folder").AddProperty("sortindex",nodeBld.GetNodesNumber().ToString());
 			
 			switch (kot) {
-				case KindOfTable.TEP: TEPMethod(table,listColumnsNumber, listtmplNumber, tableNode, "TEPTemplate","TEP");
+				case KindOfTable.TEP: TEPMethod(table,listColumnsNumber, listtmplNumber, tableNode, "TEPTemplate","TEP",interval);
 				break;	
-				case KindOfTable.manual: TEPMethod(table,listColumnsNumber, listtmplNumber, tableNode, "ManualGate","ManualParameter");
+				case KindOfTable.manual: TEPMethod(table,listColumnsNumber, listtmplNumber, tableNode, "ManualGate","ManualParameter",interval);
 				break;					
 			}
 								
@@ -88,11 +96,12 @@ namespace XmlConvertForIstok.Composite
 		#endregion
 
 		void TEPMethod(DataTable table, 
-		                      List<int> listColumnsNumber,
-		                      List<int> listtmplNumber, 
-		                      INodeBilder tableNode, 
-		                      string typetable,
-		                     string typeChannel)
+                      List<int> listColumnsNumber,
+                      List<int> listtmplNumber, 
+                      INodeBilder tableNode, 
+                      string typetable,
+                     string typeChannel,
+                    	string interval)
 		{
 			for (int j = 0, tableRowsCount = table.Rows.Count; j < tableRowsCount; j++) {
 				var elem = table.Rows[j];
@@ -108,7 +117,7 @@ namespace XmlConvertForIstok.Composite
 					if (row.Field<string>(i) == "+") {
 						var chanNode = tmplNode
 							.AddNode(row.Field<string>(listColumnsNumber[1]),typeChannel)
-							.AddProperty("formula_cod",row.Field<string>(listColumnsNumber[3]))
+							.AddProperty("formula_cod",row.Field<string>(listColumnsNumber[3]) + "," + colName + "," + interval)
 							.AddProperty("formula_text",row.Field<string>(listColumnsNumber[4]))
 							.AddProperty("index",row.Field<string>(listColumnsNumber[0]))
 							.AddProperty("sortindex",tmplNode.GetNodesNumber().ToString());

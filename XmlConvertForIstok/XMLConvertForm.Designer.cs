@@ -27,6 +27,7 @@ namespace XmlConvertForIstok
 		private System.Windows.Forms.RadioButton autoTable;
 		private System.Windows.Forms.RadioButton manualTable;
 		private System.Windows.Forms.ProgressBar progressBar;
+		private System.Windows.Forms.ComboBox intervalArray;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -62,6 +63,7 @@ namespace XmlConvertForIstok
 			this.autoTable = new System.Windows.Forms.RadioButton();
 			this.manualTable = new System.Windows.Forms.RadioButton();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
+			this.intervalArray = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -178,7 +180,7 @@ namespace XmlConvertForIstok
 			// 
 			// manualTable
 			// 
-			this.manualTable.Location = new System.Drawing.Point(261, 528);
+			this.manualTable.Location = new System.Drawing.Point(317, 528);
 			this.manualTable.Name = "manualTable";
 			this.manualTable.Size = new System.Drawing.Size(104, 24);
 			this.manualTable.TabIndex = 12;
@@ -194,12 +196,26 @@ namespace XmlConvertForIstok
 			this.progressBar.Size = new System.Drawing.Size(164, 23);
 			this.progressBar.TabIndex = 13;
 			// 
+			// intervalArray
+			// 
+			this.intervalArray.FormattingEnabled = true;
+			this.intervalArray.Items.AddRange(new object[] {
+			"час",
+			"вахта",
+			"сут",
+			"месяц"});
+			this.intervalArray.Location = new System.Drawing.Point(739, 499);
+			this.intervalArray.Name = "intervalArray";
+			this.intervalArray.Size = new System.Drawing.Size(121, 21);
+			this.intervalArray.TabIndex = 14;
+			// 
 			// XMLConvertForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1014, 617);
+			this.Controls.Add(this.intervalArray);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.manualTable);
 			this.Controls.Add(this.autoTable);
