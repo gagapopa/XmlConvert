@@ -55,23 +55,23 @@ namespace XmlConvertForIstok.Presenter
 		
 		public async void ShowTable(object sender,  EventArgs e)
 		{			
-			form.DataTableForView.DataSource = await reader.GetTable(form.TableNumberForView, form.OpenFileName);
-			foreach (DataGridViewColumn  col in form.DataTableForView.Columns) {
-				col.SortMode = DataGridViewColumnSortMode.NotSortable;
-			}
+			form.DataTableForView = await reader.GetTable(form.TableNumberForView, form.OpenFileName);
+//			foreach (DataGridViewColumn  col in form.DataTableForView.Columns) {
+//				col.SortMode = DataGridViewColumnSortMode.NotSortable;
+//			}
 		}
 		
 		public void NextClickTableShow(object sender,  EventArgs e)
 		{
 			DataTable tbl;
-			tbl = (DataTable)form.DataTableForView.DataSource;
-			form.DataTableForView.DataSource = reader.TableCleanTex(tbl, form.ListCol);		
+			tbl = form.DataTableForView;
+			form.DataTableForView = reader.TableCleanTex(tbl, form.ListCol);		
 		}
 		
 		public void AddTableClick(object sender,  EventArgs e)
 		{
 			tableToModel.TableToModelConv(form.TableName,
-			                              (DataTable)form.DataTableForView.DataSource,
+			                              form.DataTableForView,
 			                              form.ListCol,
 			                              form.ListTmpl,
 			                              form.IntervalStr,

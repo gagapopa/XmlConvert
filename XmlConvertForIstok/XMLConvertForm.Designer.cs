@@ -28,6 +28,9 @@ namespace XmlConvertForIstok
 		private System.Windows.Forms.RadioButton manualTable;
 		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.ComboBox intervalArray;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem вставитьСтрокуаToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem удалитьСтрокуToolStripMenuItem;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -50,8 +53,11 @@ namespace XmlConvertForIstok
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.OpnButton = new System.Windows.Forms.Button();
 			this.DataTableView = new System.Windows.Forms.DataGridView();
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.вставитьСтрокуаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TablesArrayList = new System.Windows.Forms.ComboBox();
 			this.SaveBtn = new System.Windows.Forms.Button();
 			this.NextBtn = new System.Windows.Forms.Button();
@@ -64,7 +70,9 @@ namespace XmlConvertForIstok
 			this.manualTable = new System.Windows.Forms.RadioButton();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.intervalArray = new System.Windows.Forms.ComboBox();
+			this.удалитьСтрокуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).BeginInit();
+			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// OpnButton
@@ -84,6 +92,7 @@ namespace XmlConvertForIstok
 			| System.Windows.Forms.AnchorStyles.Right)));
 			this.DataTableView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
 			this.DataTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.DataTableView.ContextMenuStrip = this.contextMenuStrip;
 			this.DataTableView.ImeMode = System.Windows.Forms.ImeMode.On;
 			this.DataTableView.Location = new System.Drawing.Point(12, 41);
 			this.DataTableView.Name = "DataTableView";
@@ -92,6 +101,21 @@ namespace XmlConvertForIstok
 			this.DataTableView.TabIndex = 2;
 			this.DataTableView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataTableViewCellMouseDoubleClick);
 			this.DataTableView.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataTableViewColumnHeaderMouseDoubleClick);
+			// 
+			// contextMenuStrip
+			// 
+			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.вставитьСтрокуаToolStripMenuItem,
+			this.удалитьСтрокуToolStripMenuItem});
+			this.contextMenuStrip.Name = "contextMenuStrip";
+			this.contextMenuStrip.Size = new System.Drawing.Size(163, 70);
+			// 
+			// вставитьСтрокуаToolStripMenuItem
+			// 
+			this.вставитьСтрокуаToolStripMenuItem.Name = "вставитьСтрокуаToolStripMenuItem";
+			this.вставитьСтрокуаToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.вставитьСтрокуаToolStripMenuItem.Text = "Вставить строку";
+			this.вставитьСтрокуаToolStripMenuItem.Click += new System.EventHandler(this.ВставитьСтрокуаToolStripMenuItemClick);
 			// 
 			// TablesArrayList
 			// 
@@ -211,6 +235,13 @@ namespace XmlConvertForIstok
 			this.intervalArray.TabIndex = 14;
 			this.intervalArray.Visible = false;
 			// 
+			// удалитьСтрокуToolStripMenuItem
+			// 
+			this.удалитьСтрокуToolStripMenuItem.Name = "удалитьСтрокуToolStripMenuItem";
+			this.удалитьСтрокуToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.удалитьСтрокуToolStripMenuItem.Text = "Удалить строку";
+			this.удалитьСтрокуToolStripMenuItem.Click += new System.EventHandler(this.УдалитьСтрокуToolStripMenuItemClick);
+			// 
 			// XMLConvertForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +265,7 @@ namespace XmlConvertForIstok
 			this.Name = "XMLConvertForm";
 			this.Text = "XMLConvertForm";
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).EndInit();
+			this.contextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

@@ -64,7 +64,8 @@ namespace XmlConvertForIstok
 		}
 		void CanselBtnClick(object sender, EventArgs e)
 		{
-			Close();	
+			Close();
+			Dispose();			
 		}
 		
 		

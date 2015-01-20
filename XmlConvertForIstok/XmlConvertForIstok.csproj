@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composite\INodeBilder.cs" />
+    <Compile Include="Composite\ITableToModel.cs" />
     <Compile Include="Composite\Node.cs" />
     <Compile Include="Composite\NodeBilder.cs" />
     <Compile Include="Composite\TableToModel.cs" />

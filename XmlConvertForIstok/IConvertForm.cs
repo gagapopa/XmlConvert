@@ -36,7 +36,7 @@ namespace XmlConvertForIstok
 
 		event EventHandler StationNameTextChange;
 
-		DataGridView DataTableForView {
+		DataTable DataTableForView {
 			get;
 			set;
 		}

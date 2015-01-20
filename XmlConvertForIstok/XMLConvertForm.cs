@@ -13,6 +13,7 @@ using System.ComponentModel;
 using XmlConvertForIstok.Readers;
 using System.Threading.Tasks;
 using XmlConvertForIstok.Composite;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -55,14 +56,16 @@ namespace XmlConvertForIstok
 		
 		public event EventHandler StationNameTextChange = delegate{ };
 		
-		public DataGridView DataTableForView{
+		public DataTable DataTableForView{
 			get{
 				if (DataTableView != null)
-					return DataTableView;;
+					return DataTableView.DataSource as DataTable;;
 				return null;
 			}
 			set{			
-				DataTableView = value;
+				DataTableView.DataSource = value;
+				foreach (DataGridViewColumn  col in DataTableView.Columns)
+					col.SortMode = DataGridViewColumnSortMode.NotSortable;
 			}
 		}		
 		public int[] TablesForView{			
@@ -271,6 +274,17 @@ namespace XmlConvertForIstok
 				Form txtForm = new TextForm(DataTableView.Rows[e.RowIndex].Cells[e.ColumnIndex]);
 				txtForm.ShowDialog();
 			}	
+		}
+		void ВставитьСтрокуаToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			var cell = DataTableView.SelectedCells.Cast<DataGridViewCell>().First();
+			var row = DataTableForView.NewRow();
+			DataTableForView.Rows.InsertAt(row,cell.RowIndex);
+		}
+		void УдалитьСтрокуToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			var cell = DataTableView.SelectedCells.Cast<DataGridViewCell>().First();			
+			DataTableForView.Rows.Remove(DataTableForView.Rows[cell.RowIndex]);
 		}
 	}
 }
