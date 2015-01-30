@@ -25,6 +25,10 @@ namespace XmlConvertForIstok.Convert
 			strbld.Replace(@"\^","^");
 			return  strbld.ToString();
 		}
+		public static string SetNameAndInterval(string str, string name, string terval)
+		{			
+			return Regex.Replace(str,@"[\$](.*?)[\$]",@"$$$1"+","+name+","+terval+"$");
+		}
 
 		
 		public static string EnterSimbol(string str) 

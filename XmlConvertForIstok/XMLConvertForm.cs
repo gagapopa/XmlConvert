@@ -310,8 +310,7 @@ namespace XmlConvertForIstok
 			var dlg = new SaveFileDialog();			
 			if (dlg.ShowDialog() == DialogResult.OK) {
 				CloseFileName = dlg.FileName;
-				SaveAsExcelClick(this,EventArgs.Empty);
-				SaveAsExcelBtn.Enabled = false;
+				SaveAsExcelClick(this,EventArgs.Empty);				
 			}	
 		}
 	}

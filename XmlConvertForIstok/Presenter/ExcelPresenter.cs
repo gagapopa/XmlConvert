@@ -17,7 +17,7 @@ using XmlConvertForIstok.Composite;
 namespace XmlConvertForIstok.Presenter
 {
 	/// <summary>
-	/// Description of ExcelPresenter.
+	/// Паралельно работающий презентер для сохранения модели в Эксель
 	/// </summary>
 	public class ExcelPresenter : MyPresenter
 	{

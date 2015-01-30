@@ -9,6 +9,8 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
+using XmlConvertForIstok.Convert;
+using System.Text.RegularExpressions;
 
 namespace XmlConvertForIstok.Composite
 {
@@ -90,7 +92,7 @@ namespace XmlConvertForIstok.Composite
 						var chanNode = tmplNode
 							.AddNode(row.Field<string>(listColumnsNumber[1]),typeChannel)
 							.AddProperty("formula_cod",row.Field<string>(listColumnsNumber[3]) + "," + colName + "," + interval)
-							.AddProperty("formula_text",row.Field<string>(listColumnsNumber[4]))
+							.AddProperty("formula_text",ReplaceTex.SetNameAndInterval(row.Field<string>(listColumnsNumber[4]),colName,interval))
 							.AddProperty("index",row.Field<string>(listColumnsNumber[0]))
 							.AddProperty("sortindex",tmplNode.GetNodesNumber().ToString());
 					}
