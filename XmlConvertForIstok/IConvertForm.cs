@@ -23,7 +23,7 @@ namespace XmlConvertForIstok
 			get;
 			set;
 		}
-
+		
 		event EventHandler FileOpenClick;
 
 		event EventHandler FileSaveClick;

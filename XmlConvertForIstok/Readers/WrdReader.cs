@@ -28,7 +28,7 @@ namespace XmlConvertForIstok.Readers
 	/// </summary>
 	public class WrdReader :IReader
 	{
-		static int NullMethod(int i,int j)
+		internal static int NullMethod(int i,int j)
 		{
 			return 0;
 		}
@@ -102,8 +102,8 @@ namespace XmlConvertForIstok.Readers
 		{
 			foreach (DataRow row in tbl.Rows) {
 				for (int i = 0; i < tbl.Columns.Count; i++) {
-					var str = new StringBuilder(ReplaceTex.CleanedTex(row[i].ToString()));					 
-					if (i != columnNumber.Last()) row[i] = str.Replace("$","").ToString();
+					var str = new StringBuilder(ReplaceTex.CleanedTex(row[i].ToString()));					
+					row[i] = i != columnNumber.Last() ? str.Replace("$", "").ToString() : str.ToString();
 				}
 			}
 			return tbl;

@@ -2,10 +2,10 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="*"
 		Name="Your Application"
-		Language="1049"
+		Language="1033"
 		Version="1.0.0.0"
-		UpgradeCode="B86BF812-78C7-4CAB-9BBE-EBC5517CBACF"
-		Manufacturer="Timur Company">
+		UpgradeCode="32CBE25E-6484-41C0-B136-C155B2710672"
+		Manufacturer="Your Company">
 		<Package Description="#Description"
 			Comments="Comments"
 			InstallerVersion="200"
@@ -22,19 +22,29 @@
 		<Feature Id="Complete"
 		         Title="Your Application"
 		         Description="Your description"
-		         Level="1">
+		         Level="1"
+		         ConfigurableDirectory="INSTALLDIR">
 		         <ComponentRef Id="MyComponent"/>
 		</Feature>
 		
-		<!--
- 			Using the Wix UI library.
+		<!-- 
+			Using the Wix UI library
+ 
+			WixUI_Mondo includes the full set of dialogs:
+ 			
+			welcome
+			license agreement
+			setup type (typical, custom, and complete)
+			feature customization
+			directory browse
+			disk cost. 
 
-			WixUI_Minimal is the most basic of the WixUI stock dialog sets.
- 			Its sole dialog combines the welcome and license-agreement 
-			dialogs and omits the feature customization dialog. 
-			WixUI_Minimal is appropriate when your product has no optional 
-			features.
- 		-->
-		<UIRef Id="WixUI_Minimal"/>
+			Maintenance-mode dialogs are also included. 
+
+			Use WixUI_Mondo when you have some of your product's features 
+			are not installed by default and there is a meaningful 
+			difference between typical and complete installs
+		-->
+		<UIRef Id="WixUI_Mondo"/>
 	</Product>
 </Wix>

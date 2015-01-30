@@ -56,9 +56,6 @@ namespace XmlConvertForIstok.Presenter
 		public async void ShowTable(object sender,  EventArgs e)
 		{			
 			form.DataTableForView = await reader.GetTable(form.TableNumberForView, form.OpenFileName);
-//			foreach (DataGridViewColumn  col in form.DataTableForView.Columns) {
-//				col.SortMode = DataGridViewColumnSortMode.NotSortable;
-//			}
 		}
 		
 		public void NextClickTableShow(object sender,  EventArgs e)

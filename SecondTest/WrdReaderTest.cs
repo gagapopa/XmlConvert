@@ -54,9 +54,21 @@ namespace SecondTest
 			DataTable tbl = rd.GetTable(1, "TestWord.docx").Result;
 			var listint = new List<int> { 0, 1 };
 			DataTable tblTex = rd.TableCleanTex(tbl, listint);
+
 			DataRow row = tblTex.Rows[1];
 			
-			StringAssert.Contains(@"($ G_tt\^q  )$/$\Delta t$", row[1].ToString());
+			StringAssert.Contains(@"($ G^q  )_{tt}$/$\Delta t$", row[1].ToString());
+		}
+		
+		[Test]
+		public void NumberRowsTest()
+		{
+			IReader rd = new WrdReader();
+			DataTable tbl = rd.GetTable(3, "TestWord.docx").Result;
+			
+			DataRow row = tbl.Rows[1];
+			
+			StringAssert.Contains(@"1.", row[0].ToString());
 		}
 	}
 }
