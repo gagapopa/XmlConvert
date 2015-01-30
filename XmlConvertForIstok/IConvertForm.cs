@@ -17,6 +17,10 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 namespace XmlConvertForIstok
 {
+	public enum OpenFileType{
+		Excel,
+		Word
+	}
 	public interface IConvertForm
 	{
 		ForProgress Ptog {
@@ -85,6 +89,15 @@ namespace XmlConvertForIstok
 			get;
 			set;
 		}
+	}
+	
+	public interface IFormEventsForExcel
+	{
+		event EventHandler FileExcelOpenClick;
+		
+		event EventHandler SaveAsExcelClick;
+		
+		event EventHandler TablesArrayListCommittedExcel;
 	}
 }
 

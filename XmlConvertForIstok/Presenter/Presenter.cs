@@ -21,11 +21,11 @@ namespace XmlConvertForIstok.Presenter
 	/// </summary>
 	public class MyPresenter
 	{
-		IConvertForm form;
+		protected IConvertForm form;
 		
-		IReader reader;
+		protected IReader reader;
 		
-		ITableToModel tableToModel;
+		protected ITableToModel tableToModel;
 		
 		public MyPresenter(IConvertForm _form,IReader _reader,ITableToModel _tableToModel)
 		{
@@ -67,7 +67,8 @@ namespace XmlConvertForIstok.Presenter
 		
 		public void AddTableClick(object sender,  EventArgs e)
 		{
-			tableToModel.TableToModelConv(form.TableName,
+			string tableName  = form.TableName == "" ? "Таблица" : form.TableName;			
+			tableToModel.TableToModelConv(tableName,
 			                              form.DataTableForView,
 			                              form.ListCol,
 			                              form.ListTmpl,

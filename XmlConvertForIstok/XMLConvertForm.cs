@@ -22,7 +22,7 @@ namespace XmlConvertForIstok
 	/// <summary>
 	/// Description of XMLConvertForm.
 	/// </summary>
-	public partial class XMLConvertForm : Form, IConvertForm
+	public partial class XMLConvertForm : Form, IConvertForm, IFormEventsForExcel
 	{
 		public XMLConvertForm()
 		{
@@ -46,9 +46,15 @@ namespace XmlConvertForIstok
 		
 		public event EventHandler FileOpenClick = delegate{ };
 		
+		public event EventHandler FileExcelOpenClick = delegate{ };
+		
+		public event EventHandler SaveAsExcelClick = delegate{ };
+		
 		public event EventHandler FileSaveClick  = delegate{ };			
 		
 		public event EventHandler TablesArrayListCommitted  = delegate{ };
+		
+		public event EventHandler TablesArrayListCommittedExcel  = delegate{ };
 		
 		public event EventHandler NextClick  = delegate{ };
 		
@@ -125,15 +131,26 @@ namespace XmlConvertForIstok
 		
 		private bool editingCellsOn;
 		
+		private OpenFileType fileType;
+		
 		void OpnButtonClick(object sender, EventArgs e)
 		{
 			var dlg = new OpenFileDialog();
-			dlg.Filter = "Файлы Word|*docx";
+			dlg.Filter = "Файлы Word|*.docx|Файлы Excel|*.xlsx";
 			if (dlg.ShowDialog() == DialogResult.OK) {
 				OpenFileName = dlg.FileName;
 				StationNameTextBox.Visible = true;
 				StationNameTextBox.Enabled = true;
-				FileOpenClick(this,EventArgs.Empty);
+				switch (dlg.FilterIndex) {
+					case 1:
+						FileOpenClick(this, EventArgs.Empty);
+						fileType = OpenFileType.Word;
+						break;	
+					case 2:
+						FileExcelOpenClick(this, EventArgs.Empty);
+						fileType = OpenFileType.Excel;
+						break;
+				}
 				upperLabel.Text = @"Введите название станции ->";
 				OpnButton.Enabled = false;
 			}			
@@ -163,8 +180,10 @@ namespace XmlConvertForIstok
 			autoTable.Visible = false;
 			manualTable.Visible = false;
 			intervalArray.Visible = false;
+			SaveAsExcelBtn.Enabled = true;
 			TableNumberForView = (int)TablesArrayList.SelectedItem;
-			TablesArrayListCommitted(this, EventArgs.Empty);			
+			if(fileType == OpenFileType.Word) TablesArrayListCommitted(this, EventArgs.Empty);
+			if(fileType == OpenFileType.Excel) TablesArrayListCommittedExcel(this, EventArgs.Empty);
 			listCol.RemoveAll(x => true);
 			listTmpl.RemoveAll(x => true);
 			upperLabel.Text = "";
@@ -285,6 +304,15 @@ namespace XmlConvertForIstok
 		{
 			var cell = DataTableView.SelectedCells.Cast<DataGridViewCell>().First();			
 			DataTableForView.Rows.Remove(DataTableForView.Rows[cell.RowIndex]);
+		}
+		void SaveAsExcelBtnClick(object sender, EventArgs e)
+		{
+			var dlg = new SaveFileDialog();			
+			if (dlg.ShowDialog() == DialogResult.OK) {
+				CloseFileName = dlg.FileName;
+				SaveAsExcelClick(this,EventArgs.Empty);
+				SaveAsExcelBtn.Enabled = false;
+			}	
 		}
 	}
 }

@@ -52,6 +52,7 @@ namespace XmlConvertForIstok.Readers
 			         		table.Columns.Add(col.Name);			         		
 			         	}
 			         	int rowsCount = xlTable.DataRange.RowCount();
+			         	int currentRow = 0;
 			         	xlTable.DataRange.Rows(c => true)
 			         		.ForEach(xrow => {			         		         	
 			                         	var row = table.NewRow();
@@ -60,7 +61,7 @@ namespace XmlConvertForIstok.Readers
 			                         		row[i-1] = xrow.Cell(i).Value;
 			                         	}
 			                         	table.Rows.Add(row);
-			                         	GetTableArrayProgress(xrow.RowNumber(),rowsCount);
+			                         	GetTableArrayProgress(currentRow++,rowsCount);
 			         		         });
 			         	
 						wrkBook.Dispose();

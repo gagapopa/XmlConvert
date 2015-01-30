@@ -21,10 +21,23 @@ namespace XmlConvertForIstok.Presenter
 	/// </summary>
 	public class ExcelPresenter : MyPresenter
 	{
-		public ExcelPresenter(IConvertForm _form,IReader _reader,ITableToModel _tableToMode)
+		private IFormEventsForExcel excelEvent;
+		
+		public ExcelPresenter(IConvertForm _form,IReader _reader,ITableToModel _tableToMode, IFormEventsForExcel _excelEvent)
 			:base(_form,_reader,_tableToMode)
 		{
+			excelEvent = _excelEvent;
 			
+			form.FileOpenClick -= FileOpen;
+			form.AddTableClick -= AddTableClick;
+			form.FileSaveClick -= SaveFile;
+			form.TablesArrayListCommitted -= ShowTable;
+			
+			excelEvent.FileExcelOpenClick += FileOpen;
+			excelEvent.SaveAsExcelClick += AddTableClick;
+			excelEvent.SaveAsExcelClick += SaveFile;
+			excelEvent.TablesArrayListCommittedExcel += ShowTable;
 		}
+		
 	}
 }

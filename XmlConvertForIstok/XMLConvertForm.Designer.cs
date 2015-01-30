@@ -31,6 +31,7 @@ namespace XmlConvertForIstok
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem вставитьСтрокуаToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem удалитьСтрокуToolStripMenuItem;
+		private System.Windows.Forms.Button SaveAsExcelBtn;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -58,6 +59,7 @@ namespace XmlConvertForIstok
 			this.DataTableView = new System.Windows.Forms.DataGridView();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.вставитьСтрокуаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.удалитьСтрокуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TablesArrayList = new System.Windows.Forms.ComboBox();
 			this.SaveBtn = new System.Windows.Forms.Button();
 			this.NextBtn = new System.Windows.Forms.Button();
@@ -70,7 +72,7 @@ namespace XmlConvertForIstok
 			this.manualTable = new System.Windows.Forms.RadioButton();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.intervalArray = new System.Windows.Forms.ComboBox();
-			this.удалитьСтрокуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.SaveAsExcelBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.DataTableView)).BeginInit();
 			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -108,7 +110,7 @@ namespace XmlConvertForIstok
 			this.вставитьСтрокуаToolStripMenuItem,
 			this.удалитьСтрокуToolStripMenuItem});
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(163, 70);
+			this.contextMenuStrip.Size = new System.Drawing.Size(163, 48);
 			// 
 			// вставитьСтрокуаToolStripMenuItem
 			// 
@@ -116,6 +118,13 @@ namespace XmlConvertForIstok
 			this.вставитьСтрокуаToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
 			this.вставитьСтрокуаToolStripMenuItem.Text = "Вставить строку";
 			this.вставитьСтрокуаToolStripMenuItem.Click += new System.EventHandler(this.ВставитьСтрокуаToolStripMenuItemClick);
+			// 
+			// удалитьСтрокуToolStripMenuItem
+			// 
+			this.удалитьСтрокуToolStripMenuItem.Name = "удалитьСтрокуToolStripMenuItem";
+			this.удалитьСтрокуToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+			this.удалитьСтрокуToolStripMenuItem.Text = "Удалить строку";
+			this.удалитьСтрокуToolStripMenuItem.Click += new System.EventHandler(this.УдалитьСтрокуToolStripMenuItemClick);
 			// 
 			// TablesArrayList
 			// 
@@ -235,12 +244,16 @@ namespace XmlConvertForIstok
 			this.intervalArray.TabIndex = 14;
 			this.intervalArray.Visible = false;
 			// 
-			// удалитьСтрокуToolStripMenuItem
+			// SaveAsExcelBtn
 			// 
-			this.удалитьСтрокуToolStripMenuItem.Name = "удалитьСтрокуToolStripMenuItem";
-			this.удалитьСтрокуToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.удалитьСтрокуToolStripMenuItem.Text = "Удалить строку";
-			this.удалитьСтрокуToolStripMenuItem.Click += new System.EventHandler(this.УдалитьСтрокуToolStripMenuItemClick);
+			this.SaveAsExcelBtn.Enabled = false;
+			this.SaveAsExcelBtn.Location = new System.Drawing.Point(927, 531);
+			this.SaveAsExcelBtn.Name = "SaveAsExcelBtn";
+			this.SaveAsExcelBtn.Size = new System.Drawing.Size(75, 23);
+			this.SaveAsExcelBtn.TabIndex = 15;
+			this.SaveAsExcelBtn.Text = "SaveExcel";
+			this.SaveAsExcelBtn.UseVisualStyleBackColor = true;
+			this.SaveAsExcelBtn.Click += new System.EventHandler(this.SaveAsExcelBtnClick);
 			// 
 			// XMLConvertForm
 			// 
@@ -248,6 +261,7 @@ namespace XmlConvertForIstok
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1014, 617);
+			this.Controls.Add(this.SaveAsExcelBtn);
 			this.Controls.Add(this.intervalArray);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.manualTable);
